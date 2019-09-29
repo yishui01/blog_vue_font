@@ -10,5 +10,10 @@ export default new Router({
             name: 'home',
             component: () => import('./views/Home.vue')
         },
+        {
+            path: '/art',
+            name: 'art',
+            component: () => import('./views/Article.vue')
+        },
     ]
 })

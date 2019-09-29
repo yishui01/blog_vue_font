@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="content">
-            <div class="article">
+            <div class="article" @click="$to('art')">
                 <div class="imgDiv">
-                    <img class="title_img" src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
+                    <img class="title_img"
+                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
                 </div>
                 <div class="introDiv">
                     <div class="create_time">
@@ -12,12 +13,12 @@
                     <h1>Win32常见的数据类型</h1>
                     <div class="tag-box">
                         <span><i class="el-icon-price-tag tagIcon" style="vertical-align: middle;"></i></span>
-                        <span class="tagSpan" >
+                        <span class="tagSpan">
                            C++
                         </span>
                     </div>
-                    <div class="clickAndComm" >
-                        <span><i class="el-icon-star-off tagIcon" ></i>7热度</span>
+                    <div class="clickAndComm">
+                        <span><i class="el-icon-star-off tagIcon"></i>7热度</span>
                         <span><i class="el-icon-s-comment tagIcon"></i>0条评论</span>
                     </div>
                 </div>
@@ -28,7 +29,8 @@
 
             <div class="article">
                 <div class="imgDiv">
-                    <img class="title_img" src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
+                    <img class="title_img"
+                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
                 </div>
                 <div class="introDiv">
                     ad
@@ -39,7 +41,8 @@
             </div>
             <div class="article">
                 <div class="imgDiv">
-                    <img class="title_img" src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
+                    <img class="title_img"
+                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
                 </div>
                 <div class="introDiv">
                     ad
@@ -50,7 +53,8 @@
             </div>
             <div class="article">
                 <div class="imgDiv">
-                    <img class="title_img" src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
+                    <img class="title_img"
+                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
                 </div>
                 <div class="introDiv">
                     <div class="create_time">
@@ -93,7 +97,8 @@
         -ms-flex-pack: justify;
         justify-content: space-between;
     }
-    .article{
+
+    .article {
         position: relative;
         display: flex;
         height: 280px;
@@ -101,13 +106,13 @@
         background: white;
         border-radius: 10px;
         margin-bottom: 40px;
-        font-size: 14px;
-        -webkit-transform:translate3d( 0, 0, 0);
+        font-size: 12px;
         transition: 0.3s;
     }
-    .article:hover{
+
+    .article:hover {
         box-shadow: -5px 5px 10px #707070;
-        transform: scale(1.02) translate3d( 0, 0, 0);
+        transform: scale(1.02);
     }
 
     /***********************这是每个article的选择器，单双切换***************************/
@@ -120,7 +125,7 @@
         height: auto;
     }
 
-    .article:nth-child(3n) .title_img, .article:nth-child(3n-1) .title_img{
+    .article:nth-child(3n) .title_img, .article:nth-child(3n-1) .title_img {
         border-top-left-radius: 10px;
         border-top-right-radius: 10px;
         border-bottom-left-radius: 0;
@@ -133,14 +138,17 @@
     }
 
     /************************头图部分*************************************/
-    .imgDiv{
-        height: 100%;
-        width: 100%;
+    .article:nth-child(3n) .imgDiv, .article:nth-child(3n-1) .imgDiv {
+        -webkit-box-flex: 1;
+        -ms-flex: 1 0 220px;
+        flex: 1 0 220px;
+        height: 220px;
     }
-    .title_img{
+
+    .title_img {
         width: 100%;
         height: 100%;
-        border-radius:10px 0 0 10px;
+        border-radius: 10px 0 0 10px;
         -o-object-fit: cover;
         object-fit: cover;
         mix-blend-mode: multiply;
@@ -148,7 +156,7 @@
 
     /*******************以下为左上角类别套带样式*************/
     .article:nth-child(3n) .classify, .article:nth-child(3n-1) .classify {
-        background: linear-gradient(30deg,#ee7752,#e73c7e);
+        background: linear-gradient(30deg, #ee7752, #e73c7e);
     }
 
     .article:nth-child(3n) .classifybox:after,
@@ -158,7 +166,7 @@
         border-color: #621b18;
     }
 
-    .classifybox{
+    .classifybox {
         position: absolute;
         left: -8px;
         top: -8px;
@@ -167,6 +175,7 @@
         overflow: hidden;
         z-index: 30;
     }
+
     .classifybox:after, .classifybox:before {
         position: absolute;
         z-index: -1;
@@ -189,7 +198,7 @@
     }
 
 
-    .classify{
+    .classify {
         width: 220px;
         left: -70px;
         top: 25px;
@@ -198,23 +207,24 @@
         position: relative;
         color: #fff;
         font-weight: 600;
-        background-image: -webkit-gradient(linear,left top,right top,from(#23a6d5),to(#23d5ab));
-        background-image: linear-gradient(90deg,#23a6d5,#23d5ab);
-        text-shadow: 0 1px 1px rgba(0,0,0,.2);
-        -webkit-box-shadow: 0 5px 10px rgba(0,0,0,.1);
-        box-shadow: 0 5px 10px rgba(0,0,0,.1);
+        background-image: -webkit-gradient(linear, left top, right top, from(#23a6d5), to(#23d5ab));
+        background-image: linear-gradient(90deg, #23a6d5, #23d5ab);
+        text-shadow: 0 1px 1px rgba(0, 0, 0, .2);
+        -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
+        box-shadow: 0 5px 10px rgba(0, 0, 0, .1);
         -webkit-transform: rotate(-45deg);
         transform: rotate(-45deg);
     }
 
     /********************以下为introDiv部分***************/
-    .introDiv{
-        flex: 0 0 500px;
+    .introDiv {
+        flex: 0 0 400px;
         padding: 25px 40px;
         color: #34495e;
     }
-    .introDiv h1{
-        font-size: 30px;
+
+    .introDiv h1 {
+        font-size: 24px;
         font-weight: 400;
         margin: 25px 0 25px 0;
         display: -webkit-box;
@@ -222,36 +232,40 @@
         -webkit-line-clamp: 2;
         overflow: hidden;
     }
-    .create_time{
+
+    .create_time {
         text-align: right;
         margin-bottom: 5px;
     }
-    .tag-box{
+
+    .tag-box {
         margin-bottom: 5px;
     }
-    .tagSpan{
-        background-color: #e6a23c;
-        border-color: #e6a23c;
-        color: #fff;
+
+    .tagSpan {
+        background-color: #fdf6ec;
+        border-color: #faecd8;
+        color: #e6a23c;
         display: inline-block;
         font-size: 12px;
         border-radius: 4px;
         box-sizing: border-box;
         white-space: nowrap;
-
-        height: 24px;
-        padding: 0 8px;
-        line-height: 22px;
+        height: 20px;
+        padding: 0 5px;
+        line-height: 19px;
     }
-    .tagIcon{
+
+    .tagIcon {
         margin-right: 5px;
-        font-size: 18px;
+        font-size: 14px;
     }
 
-    .clickAndComm{
+    .clickAndComm {
         line-height: 30px;
     }
-    .clickAndComm span{
+
+    .clickAndComm span {
         margin-right: 30px;
     }
 </style>
