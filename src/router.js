@@ -15,5 +15,20 @@ export default new Router({
             name: 'art',
             component: () => import('./views/Article.vue')
         },
+        {
+            path: '/video',
+            name: 'video',
+            component: () => import('./views/Video.vue')
+        },
+        {
+            path: '/load',
+            name: 'load',
+            component: () => import('./components/ClimLoading')
+        },
+        {
+            path: '/load2',
+            name: 'load2',
+            component: () => import('./components/RotateLoading')
+        },
     ]
 })

@@ -4,7 +4,10 @@
             <el-col :span="4">
                 <nav class="colorNav">
                     <ul class="colorUl">
-                        <li class="curr sc-gqjmRU fXyiBz" color="#75878a" title="即各种颜色掺入黑色后的颜色"
+                        <li @click="checkLi(index)" v-for="(item,index) in colorList" :key="index"
+                            class="sc-gqjmRU fXyiBz" :class="{curr:checkLiIndex == index}"
+                            color="#75878a"
+                            title="即各种颜色掺入黑色后的颜色"
                             style="border-top-color: rgb(117, 135, 138);">
                             <div class="line1">
                                 <div class="cmyk">
@@ -83,12 +86,40 @@
                 </div>
                 <myfoot class="footer"></myfoot>
             </el-col>
-            <el-col :span="4">
-                <el-button @click="changeColor">changeColor</el-button>
-
+            <el-col :span="3" :offset="1">
+                <hgroup class="sc-cSHVUG hQSjWe" style="color: rgb(233, 241, 246);"><h1>苍色</h1>
+                    <div class="sc-fjdhpX eNDZOk">
+                        <svg t="1568172188297" class="icon" viewBox="0 0 1024 1024" version="1.1"
+                             xmlns="http://www.w3.org/2000/svg" p-id="2640" width="32" height="32">
+                            <path d="M512 910.933333l-61.866667-56.106667c-219.733333-199.466667-364.8-331.093333-364.8-492.16 0-131.626667 103.04-234.666667 234.666667-234.666667 74.24 0 145.493333 34.56 192 88.96 46.506667-54.4 117.76-88.96 192-88.96 131.626667 0 234.666667 103.04 234.666667 234.666667 0 161.066667-145.066667 292.693333-364.8 492.16l-61.866667 56.106667z"
+                                  p-id="2641" fill="#fff"></path>
+                        </svg>
+                    </div>
+                    <h2>cāng sè</h2>
+                    <div class="sc-jzJRlG byuKKj"><h2>秋瑾 ·《菩萨蛮·寄女伴》</h2>
+                        <p class="line">「无边家国事 并入双蛾翠」</p></div>
+                </hgroup>
             </el-col>
         </el-row>
         <div id="player" class="aplayer" style="width: 20%;"></div>
+
+
+        <div class="rdiZx">
+            <aside class="colorSet">
+                <div class="sets sc-dnqmqq dhAXtJ" :class="{expand:expandBottom}">
+                    <ul>
+                        <li
+                                @click="checkCircle(index)"
+                                :key="index" v-for="(item, index) in circleList"
+                                :class="{selected:checkCircleIndex == index}"
+                                :style='{background:item.rgb}'>{{item.name}}
+                        </li>
+                    </ul>
+                    <button class="btn" style="outline: none;" @click="toggleBottomCircle">巜</button>
+                </div>
+            </aside>
+        </div>
+
     </div>
 </template>
 <script>
@@ -160,20 +191,56 @@
             })
 
         },
+        watch: {
+            checkLiIndex(newVal) {
+                document.querySelector('body').setAttribute('style', 'background-color:' + this.colorList[newVal].background + ';')
+            }
+        },
         methods: {
-            changeColor() {
-                document.querySelector('body').setAttribute('style', 'background-color:#395260;')
+            checkLi(index) {
+                this.checkLiIndex = index
+            },
+            checkCircle(index) {
+                this.checkCircleIndex = index
+            },
+            toggleBottomCircle() {
+                this.expandBottom = !this.expandBottom
             }
         },
         data() {
-            return {}
+            return {
+                checkLiIndex: 0,
+                checkCircleIndex: 0,
+                expandBottom: false,
+                colorList: [
+                    {background: "green"},
+                    {background: "gray"},
+                    {background: "lightgray"},
+                    {background: "black"},
+                    {background: "lightblue"},
+                    {background: "lightblue"},
+                    {background: "lightblue"},
+                    {background: "lightblue"},
+                    {background: "lightblue"},
+                ],
+                circleList: [
+                    {rgb: "rgb(255, 179, 167)", name: "红"},
+                    {rgb: "rgb(10, 163, 68)", name: "绿"},
+                    {rgb: "rgb(68, 206, 246)", name: "蓝"},
+                    {rgb: "rgb(117, 135, 138)", name: "苍"},
+                    {rgb: "rgb(210, 240, 244)", name: "水"},
+                    {rgb: "rgb(240, 240, 244)", name: "灰白"},
+                    {rgb: "rgb(0, 0, 0)", name: "黑"},
+                    {rgb: "rgb(234, 205, 118)", name: "金银"},
+                ]
+            }
         }
     }
 </script>
 <style>
     .fXyiBz.curr {
-        box-shadow: rgba(0, 0, 0, 0.6) 0px 0px 4px;
-        text-shadow: black 0px 0px 10px;
+        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
+        text-shadow: black 0 0 10px;
     }
 
     .fXyiBz {
@@ -207,10 +274,11 @@
         flex-direction: column;
         justify-content: space-between;
         text-transform: uppercase;
-        font-size: 0.9rem;
         font-weight: bold;
         width: 100%;
+        margin-top: 5px;
         box-sizing: border-box;
+        font-size: 14px;
     }
 
     .pinyin {
@@ -300,9 +368,9 @@
     .colorUl li {
         color: rgb(255, 255, 255);
         display: flex;
-        height: 400px;
-        width: 75px;
-        border: 1px solid black;
+        height: 350px;
+        width: 65px;
+        box-sizing: border-box;
         flex-direction: row;
         -webkit-writing-mode: vertical-lr;
         writing-mode: vertical-lr;
@@ -315,36 +383,38 @@
         padding: 0.5rem 0.2rem 0.4rem;
         margin: 0.4rem;
         transition: all 0.5s ease 0s;
-
     }
-
 
     .fXyiBz .line2 .rgb {
         display: flex;
         flex-direction: column;
     }
 
-    .fXyiBz .line2 .rgb .line.r {
-        height: 150px;
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 45.8824%, rgba(255, 255, 255, 0.3) 45.8824%, rgba(255, 255, 255, 0.3) 100%);
-    }
-    .fXyiBz .line2 .rgb .line.g {
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 52.9412%, rgba(255, 255, 255, 0.3) 52.9412%, rgba(255, 255, 255, 0.3) 100%);
-    }
-    .fXyiBz .line2 .rgb .line.b {
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 54.1176%, rgba(255, 255, 255, 0.3) 54.1176%, rgba(255, 255, 255, 0.3) 100%);
-    }
     .fXyiBz .line2 .rgb .line {
         width: 2px;
-        height: 6rem;
+        height: 9rem;
         margin: 0px 1px;
     }
 
+    .fXyiBz .line2 .rgb .line.r {
+        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 45.8824%, rgba(255, 255, 255, 0.3) 45.8824%, rgba(255, 255, 255, 0.3) 100%);
+    }
 
+    .fXyiBz .line2 .rgb .line.g {
+        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 52.9412%, rgba(255, 255, 255, 0.3) 52.9412%, rgba(255, 255, 255, 0.3) 100%);
+    }
+
+    .fXyiBz .line2 .rgb .line.b {
+        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 54.1176%, rgba(255, 255, 255, 0.3) 54.1176%, rgba(255, 255, 255, 0.3) 100%);
+    }
 
     * {
         margin: 0;
         padding: 0;
+    }
+
+    ul {
+        list-style: none;
     }
 
     body {
@@ -354,10 +424,10 @@
         overflow: -moz-scrollbars-none;
     }
 
-    /***去掉滚动条但不影响滚动***/
-    /**::-webkit-scrollbar {*/
-    /*    display: none;*/
-    /*}*/
+    /**去掉滚动条但不影响滚动**/
+    *::-webkit-scrollbar {
+        display: none;
+    }
 
     .footer {
         background: black;
@@ -385,14 +455,181 @@
     .colorNav {
         position: relative;
         height: 100vh;
-        width: 15.8rem;
-        margin-right: 1.5rem;
+        width: 100%;
+        padding-top: 20px;
+        box-sizing: border-box;
+        padding-left: 1.5rem;
         vertical-align: baseline;
         border-style: initial;
         border-color: initial;
         border-image: initial;
         font: inherit;
         overflow-y: scroll;
+    }
+
+
+    /**********右边栏***********/
+    .hQSjWe {
+        color: rgb(51, 51, 51);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        -webkit-box-align: center;
+        align-items: center;
+        box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 8px;
+        position: relative;
+        width: 6rem;
+        height: 550px;
+        cursor: default;
+        margin-top: 8rem;
+        margin-right: 0.5rem;
+        min-height: 18rem;
+        border-radius: 6px;
+        padding: 1rem 0.8rem;
+    }
+
+    .hQSjWe > h1 {
+        color: inherit;
+        font-size: 3.2rem;
+        letter-spacing: -0.5rem;
+        -webkit-writing-mode: vertical-lr;
+        writing-mode: vertical-lr;
+        font-family: TChinese, SimSun, FangSong, STSong, STZhongsong, LiSu, KaiTi, "Microsoft YaHei";
+        transition: transform 0.4s ease-in 0s;
+        margin-block-start: 0.83em;
+        margin-block-end: 0.83em;
+    }
+
+    .eNDZOk {
+        position: absolute;
+        top: 4px;
+        left: 4px;
+        cursor: pointer;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+    }
+
+    .hQSjWe > h1:hover {
+        transform: scale(1.1);
+    }
+
+    .hQSjWe > h2 {
+        text-transform: capitalize;
+        font-size: 0.6rem;
+        -webkit-writing-mode: vertical-lr;
+        writing-mode: vertical-lr;
+        position: absolute;
+        right: 0.2rem;
+        top: 0.4rem;
+        color: inherit;
+    }
+
+    .byuKKj {
+        color: rgb(255, 255, 235);
+        display: flex;
+        line-height: 1.4rem;
+        margin-top: 1rem;
+        text-shadow: rgba(33, 33, 33, 0.6) 0px 0px 4px;
+        padding: 0.4rem;
+        animation: 1s ease 0s 1 normal forwards running hbOYnO;
+    }
+
+    .byuKKj > h2 {
+        color: inherit;
+        font-size: 0.8rem;
+        letter-spacing: 0.15rem;
+        align-self: flex-end;
+        -webkit-writing-mode: vertical-lr;
+        writing-mode: vertical-lr;
+        margin-right: 0.3rem;
+    }
+
+    .byuKKj .line {
+        color: inherit;
+        -webkit-writing-mode: vertical-lr;
+        writing-mode: vertical-lr;
+        letter-spacing: 0.4rem;
+        font-size: 16px;
+        font-weight: bold;
+        position: relative;
+        top: 5px;
+    }
+
+
+    /*************右侧底部******************/
+    .rdiZx .colorSet {
+        position: fixed;
+        bottom: 1rem;
+        right: 3rem;
+        z-index: 999;
+        padding: 0px 1.7rem;
+        color: white;
+    }
+
+    .dhAXtJ ul {
+        display: flex;
+        position: relative;
+    }
+
+    .dhAXtJ ul > li {
+        margin-right: -2.6rem;
+    }
+
+    .dhAXtJ.expand ul li {
+        margin-right: 0.35rem;
+    }
+
+
+    .dhAXtJ ul > li {
+        cursor: pointer;
+        box-shadow: black 0px 0px 0.8rem;
+        width: 3.6rem;
+        height: 3.6rem;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        font-size: 1.2rem;
+        font-weight: 800;
+        transition: all 0.6s ease 0s;
+        border-radius: 50%;
+    }
+
+    .dhAXtJ.expand .btn {
+        transform: translateY(-50%) rotateZ(180deg);
+    }
+
+    .dhAXtJ .btn {
+        color: white;
+        cursor: pointer;
+        position: absolute;
+        right: -1.6rem;
+        top: 50%;
+        transform: translateY(-50%);
+        width: 3.6rem;
+        height: 3.6rem;
+        display: flex;
+        -webkit-box-pack: center;
+        justify-content: center;
+        -webkit-box-align: center;
+        align-items: center;
+        font-size: 1.2rem;
+        box-shadow: black 1px -1px 6px;
+        background: rgb(51, 51, 51);
+        border-width: initial;
+        border-style: none;
+        border-color: initial;
+        border-image: initial;
+        border-radius: 50%;
+        transition: all 0.6s ease 0s;
+    }
+
+    .dhAXtJ ul > li.selected {
+        transform: translateY(-1.6rem);
     }
 
 
