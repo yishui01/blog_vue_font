@@ -213,7 +213,7 @@
                 checkCircleIndex: 0,
                 expandBottom: false,
                 colorList: [
-                    {background: "green"},
+                    {background: "white"},
                     {background: "gray"},
                     {background: "lightgray"},
                     {background: "black"},
@@ -238,6 +238,21 @@
     }
 </script>
 <style>
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
+    }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+    }
+
+    .fade_y-enter-active, .fade_y-leave-active {
+        transition: 1s;
+    }
+    .fade_y-enter, .fade_y-leave-to /* .fade-leave-active below version 2.1.8 */ {
+        opacity: 0;
+        transform: translateY(5px);
+    }
+
     .fXyiBz.curr {
         box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
         text-shadow: black 0 0 10px;
