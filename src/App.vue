@@ -1,6 +1,6 @@
 <template>
     <div class="contianer">
-        <el-row>
+        <el-row class="n">
             <el-col :span="4">
                 <nav class="colorNav">
                     <ul class="colorUl">
@@ -102,7 +102,6 @@
             </el-col>
         </el-row>
         <div id="player" class="aplayer" style="width: 20%;"></div>
-
 
         <div class="rdiZx">
             <aside class="colorSet">
@@ -241,14 +240,18 @@
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
-    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
         opacity: 0;
     }
 
     .fade_y-enter-active, .fade_y-leave-active {
         transition: 1s;
     }
-    .fade_y-enter, .fade_y-leave-to /* .fade-leave-active below version 2.1.8 */ {
+
+    .fade_y-enter, .fade_y-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
         opacity: 0;
         transform: translateY(5px);
     }
@@ -440,7 +443,7 @@
     }
 
     /**去掉滚动条但不影响滚动**/
-    *::-webkit-scrollbar {
+    .colorNav::-webkit-scrollbar {
         display: none;
     }
 
