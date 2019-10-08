@@ -11,7 +11,6 @@ Vue.use(Tag)
 Vue.use(Row)
 Vue.use(Col)
 
-
 Vue.config.productionTip = false
 
 Vue.prototype.$to = (path,param)=>{
