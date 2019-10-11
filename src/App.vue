@@ -1,5 +1,6 @@
 <template>
     <div class="contianer">
+        <myhead></myhead>
         <el-row class="n">
             <el-col :span="4">
                 <nav class="colorNav">
@@ -76,15 +77,13 @@
                     </ul>
                 </nav>
             </el-col>
-            <el-col :span="16" style="position: relative;padding-bottom: 280px;">
-                <myhead></myhead>
+            <el-col :span="16" style="position: relative;padding-bottom: 80px;">
                 <div>
                     <keep-alive>
                         <router-view v-if="$route.meta.keepAlive" class="slide"/>
                     </keep-alive>
                     <router-view v-if="!$route.meta.keepAlive" class="slide"/>
                 </div>
-                <myfoot class="footer"></myfoot>
             </el-col>
             <el-col :span="3" :offset="1">
                 <hgroup class="sc-cSHVUG hQSjWe" style="color: rgb(233, 241, 246);"><h1>苍色</h1>
@@ -118,6 +117,7 @@
                 </div>
             </aside>
         </div>
+        <myfoot class="footer"></myfoot>
 
     </div>
 </template>
@@ -237,6 +237,7 @@
     }
 </script>
 <style>
+
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
@@ -449,7 +450,6 @@
 
     .footer {
         background: black;
-        position: absolute;
         bottom: 0;
         width: 100%;
     }
@@ -483,6 +483,7 @@
         border-image: initial;
         font: inherit;
         overflow-y: scroll;
+        margin-bottom: 50px;
     }
 
 
@@ -649,6 +650,5 @@
     .dhAXtJ ul > li.selected {
         transform: translateY(-1.6rem);
     }
-
 
 </style>

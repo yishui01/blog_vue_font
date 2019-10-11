@@ -212,9 +212,9 @@
 <style scoped>
     /****************************容器部分************************/
     .detail {
-        max-width: 990px;
+        max-width: 1080px;
         margin: 30px auto 0;
-        padding: 50px 35px 20px;
+        padding: 50px 50px 20px;
         font-size: 16px;
         color: #444;
         background: rgba(255, 255, 255);
@@ -344,7 +344,7 @@
 
     /********************评论框************************/
     .commentbox{
-        max-width: 990px;
+        max-width: 1080px;
         background-color: white;
         margin: auto;
         padding: 50px 35px 20px;

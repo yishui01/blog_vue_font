@@ -3,11 +3,12 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import 'element-ui/lib/theme-chalk/index.css';
-import { Button, Select,Row,Col,Tag } from 'element-ui';
+import { Button, Select,Row,Col,Tag,Popover,Link } from 'element-ui';
 Vue.use(Button)
 Vue.use(Select)
 Vue.use(Tag)
-
+Vue.use(Popover)
+Vue.use(Link)
 Vue.use(Row)
 Vue.use(Col)
 

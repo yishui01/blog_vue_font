@@ -21,6 +21,11 @@ export default new Router({
             component: () => import('./views/Video.vue')
         },
         {
+            path: '/link',
+            name: 'link',
+            component: () => import('./views/Link.vue')
+        },
+        {
             path: '/load',
             name: 'load',
             component: () => import('./components/ClimLoading')

@@ -1,7 +1,7 @@
 <template>
     <div>
         <el-row class="header">
-            <el-col :span="18" :offset="3" class="headCol">
+            <el-col :span="13" :offset="5" class="headCol">
                 <div style="display: flex;">
                     <img src="../assets/logo.png" class="logo" @click="$to('/')">
                     <div @click="$to(item.url)"
