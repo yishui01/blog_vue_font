@@ -11,6 +11,11 @@ export default new Router({
             component: () => import('./views/Home.vue')
         },
         {
+            path: '/rain',
+            name: 'rain',
+            component: () => import('./components/Rain.vue')
+        },
+        {
             path: '/art',
             name: 'art',
             component: () => import('./views/Article.vue')

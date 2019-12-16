@@ -135,10 +135,10 @@
                                        class="ivu-input ivu-input-default"> <!----></div>
                         </div>
                         <el-button type="primary" plain autofocus="false">提交评论</el-button>
-<!--                        <button type="button" class="ivu-btn ivu-btn-primary">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;-->
-<!--                            <span><i class="ivu-icon ivu-icon-ios-create"></i>-->
-<!--            -->
-<!--          </span></button>-->
+                        <!--                        <button type="button" class="ivu-btn ivu-btn-primary">&lt;!&ndash;&ndash;&gt; &lt;!&ndash;&ndash;&gt;-->
+                        <!--                            <span><i class="ivu-icon ivu-icon-ios-create"></i>-->
+                        <!--            -->
+                        <!--          </span></button>-->
                     </div>
                 </div>
             </div>
@@ -217,7 +217,7 @@
         padding: 50px 50px 20px;
         font-size: 16px;
         color: #444;
-        background: rgba(255, 255, 255);
+        background: rgba(255, 255, 255, 0.9);
     }
 
     .title-box {
@@ -343,21 +343,23 @@
     }
 
     /********************评论框************************/
-    .commentbox{
+    .commentbox {
         max-width: 1080px;
         background-color: white;
         margin: auto;
         padding: 50px 35px 20px;
-       /* padding: 20px 0 40px;*/
+        /* padding: 20px 0 40px;*/
     }
-    .comment-title{
+
+    .comment-title {
         font-size: 20px;
         margin: 10px 0 15px;
         border-left: 4px solid #f7576c;
         padding-left: 10px;
         line-height: 22px;
     }
-    .comment-title span{
+
+    .comment-title span {
         font-size: 14px;
         margin-top: -6px;
         position: absolute;
@@ -369,29 +371,34 @@
         display: -ms-flexbox;
         display: flex;
     }
+
     .input-box .userbox {
         display: -webkit-box;
         display: -ms-flexbox;
         display: flex;
     }
+
     .input-box .userbox .user-img {
         width: 60px;
         margin-right: 15px;
     }
+
     .input-box .userbox .user-img img {
         width: 100%;
         border-radius: 50%;
         -webkit-box-shadow: 3px 3px 11px #d6d6d6;
         box-shadow: 3px 3px 11px #d6d6d6;
     }
+
     .input-box .userbox .user-img h4 {
         line-height: 26px;
         font-size: 14px;
         text-align: center;
         color: #f7576c;
     }
+
     .higtlight h4 {
-        padding: 8px 0 4px!important;
+        padding: 8px 0 4px !important;
     }
 
 
@@ -400,6 +407,7 @@
         -ms-flex: 1;
         flex: 1;
     }
+
     .ivu-input-wrapper {
         display: inline-block;
         width: 100%;
@@ -407,9 +415,11 @@
         vertical-align: middle;
         line-height: normal;
     }
+
     .input-box .textbox textarea.ivu-input {
         resize: none;
     }
+
     textarea.ivu-input {
         max-width: 100%;
         height: auto;
@@ -417,6 +427,7 @@
         vertical-align: bottom;
         font-size: 14px;
     }
+
     .ivu-input {
         display: inline-block;
         width: 100%;
@@ -431,7 +442,7 @@
         background-image: none;
         position: relative;
         cursor: text;
-        transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+        transition: border .2s ease-in-out, background .2s ease-in-out, box-shadow .2s ease-in-out;
     }
 
 
@@ -444,11 +455,13 @@
         -ms-flex-pack: end;
         justify-content: flex-end;
     }
+
     .input-box .textbox .submit-box .ykname {
         -webkit-box-flex: 1;
         -ms-flex: 1;
         flex: 1;
     }
+
     .ivu-input-wrapper {
         display: inline-block;
         width: 100%;
@@ -456,6 +469,7 @@
         vertical-align: middle;
         line-height: normal;
     }
+
     .ivu-input {
         display: inline-block;
         width: 100%;
@@ -470,7 +484,7 @@
         background-image: none;
         position: relative;
         cursor: text;
-        transition: border .2s ease-in-out,background .2s ease-in-out,box-shadow .2s ease-in-out;
+        transition: border .2s ease-in-out, background .2s ease-in-out, box-shadow .2s ease-in-out;
     }
 
 
@@ -482,20 +496,24 @@
         font-size: 14px;
         padding: 12px 0;
     }
+
     .commentList .user-ava {
         width: 60px;
         min-width: 60px;
         margin-right: 15px;
     }
+
     .commentList .user-ava img {
         width: 100%;
         border-radius: 50%;
         -webkit-box-shadow: 3px 3px 11px #d6d6d6;
         box-shadow: 3px 3px 11px #d6d6d6;
     }
+
     img {
         border-style: none;
     }
+
     .commentList .comment-box {
         position: relative;
         line-height: 22px;
@@ -508,6 +526,7 @@
         width: 0;
         background: #fff;
     }
+
     .commentList .comment-box .username {
         line-height: 30px;
         font-weight: 700;
@@ -524,6 +543,7 @@
         -ms-flex-pack: justify;
         justify-content: space-between;
     }
+
     .commentList .comment-box .username .created {
         margin-left: 10px;
         font-weight: 100;

@@ -117,7 +117,7 @@
                 </div>
             </aside>
         </div>
-        <myfoot class="footer"></myfoot>
+        <!--        <myfoot class="footer"></myfoot>-->
 
     </div>
 </template>
@@ -134,7 +134,7 @@
             myfoot
         },
         mounted() {
-            document.querySelector('body').setAttribute('style', 'background-color:#75878a;')
+            //document.querySelector('body').setAttribute('style', 'background-color:#75878a;')
             // Since `APlayer2` and `APlayer3` are not the same, the `mutex` option is useless
             new APlayer({
                 element: document.getElementById('player'),
@@ -437,10 +437,17 @@
     }
 
     body {
-        background-image: url('https://works.yangerxiao.com/chinese-colors/00746b7e611ff49d789bc56df95eba4b.png');
-        transition: background-color 1.6s ease 0s;
-        -ms-overflow-style: none;
-        overflow: -moz-scrollbars-none;
+        /*background-image: url('https://works.yangerxiao.com/chinese-colors/00746b7e611ff49d789bc56df95eba4b.png');*/
+        /*background-image: url('./assets/s.jpg');*/
+        /*transition: background-color 1.6s ease 0s;*/
+        /*-ms-overflow-style: none;*/
+        /*overflow: -moz-scrollbars-none;*/
+
+        background-image: url('./assets/a.jpg');
+        /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
     }
 
     /**去掉滚动条但不影响滚动**/
