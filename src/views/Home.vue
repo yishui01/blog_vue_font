@@ -83,7 +83,7 @@
 
     /****************************容器部分************************/
     .content {
-        max-width: 940px;
+        max-width: 1080px;
         margin: 60px auto;
         -webkit-box-flex: 1;
         -ms-flex: 1;

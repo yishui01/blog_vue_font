@@ -1,83 +1,17 @@
 <template>
     <div class="contianer">
         <myhead></myhead>
-        <el-row class="n">
-            <el-col :span="4">
-                <nav class="colorNav">
-                    <ul class="colorUl">
-                        <li @click="checkLi(index)" v-for="(item,index) in colorList" :key="index"
-                            class="sc-gqjmRU fXyiBz" :class="{curr:checkLiIndex == index}"
-                            color="#75878a"
-                            title="即各种颜色掺入黑色后的颜色"
-                            style="border-top-color: rgb(117, 135, 138);">
-                            <div class="line1">
-                                <div class="cmyk">
-                                    <i class="circle c">
-                                        <div class="sc-gZMcBi fGWcKV">
-                                            <div class="percent sc-iwsKbI eImMjg">
-                                                <svg viewBox="0 0 36 36" class="circular-chart orange">
-                                                    <path class="circle-bg"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                    <path class="circle" stroke-dasharray="40, 100"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                                          style="stroke: rgba(102, 87, 87, 0.96);"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </i>
-                                    <i class="circle y">
-                                        <div class="sc-gZMcBi fGWcKV">
-                                            <div class="percent sc-iwsKbI eImMjg">
-                                                <svg viewBox="0 0 36 36" class="circular-chart orange">
-                                                    <path class="circle-bg"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                    <path class="circle" stroke-dasharray="20, 100"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                                          style="stroke: rgba(102, 87, 87, 0.96);"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </i>
-                                    <i class="circle y">
-                                        <div class="sc-gZMcBi fGWcKV">
-                                            <div class="percent sc-iwsKbI eImMjg">
-                                                <svg viewBox="0 0 36 36" class="circular-chart orange">
-                                                    <path class="circle-bg"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                    <path class="circle" stroke-dasharray="20, 100"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                                          style="stroke: rgba(102, 87, 87, 0.96);"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </i>
-                                    <i class="circle y">
-                                        <div class="sc-gZMcBi fGWcKV">
-                                            <div class="percent sc-iwsKbI eImMjg">
-                                                <svg viewBox="0 0 36 36" class="circular-chart orange">
-                                                    <path class="circle-bg"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"></path>
-                                                    <path class="circle" stroke-dasharray="20, 100"
-                                                          d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831"
-                                                          style="stroke: rgba(102, 87, 87, 0.96);"></path>
-                                                </svg>
-                                            </div>
-                                        </div>
-                                    </i>
-                                </div>
-                                <h2 class="name"><span class="seq">1</span><span class="txt">苍色</span></h2></div>
-                            <div class="line2"><p class="hex">#75878a</p>
-                                <div class="rgb">
-                                    <i class="line r" percent="117"></i>
-                                    <i class="line g" percent="135"></i>
-                                    <i class="line b" percent="138"></i>
-                                </div>
-                                <p class="pinyin">cāng sè</p></div>
-                        </li>
-                    </ul>
-                </nav>
+        <div style="height: 80px;"></div>
+        <el-row>
+            <el-col :offset="1" :span="1">
+                <hgroup class=" hQSjWe">
+                    <div class="sc-jzJRlG byuKKj ">
+                        <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
+                        <span class="line">「无边家国事 并入双蛾翠」</span>
+                    </div>
+                </hgroup>
             </el-col>
-            <el-col :span="16" style="position: relative;padding-bottom: 80px;">
+            <el-col :span="16" :offset="2">
                 <div>
                     <keep-alive>
                         <router-view v-if="$route.meta.keepAlive" class="slide"/>
@@ -85,19 +19,9 @@
                     <router-view v-if="!$route.meta.keepAlive" class="slide"/>
                 </div>
             </el-col>
-            <el-col :span="3" :offset="1">
-                <hgroup class="sc-cSHVUG hQSjWe" style="color: rgb(233, 241, 246);"><h1>苍色</h1>
-                    <div class="sc-fjdhpX eNDZOk">
-                        <svg t="1568172188297" class="icon" viewBox="0 0 1024 1024" version="1.1"
-                             xmlns="http://www.w3.org/2000/svg" p-id="2640" width="32" height="32">
-                            <path d="M512 910.933333l-61.866667-56.106667c-219.733333-199.466667-364.8-331.093333-364.8-492.16 0-131.626667 103.04-234.666667 234.666667-234.666667 74.24 0 145.493333 34.56 192 88.96 46.506667-54.4 117.76-88.96 192-88.96 131.626667 0 234.666667 103.04 234.666667 234.666667 0 161.066667-145.066667 292.693333-364.8 492.16l-61.866667 56.106667z"
-                                  p-id="2641" fill="#fff"></path>
-                        </svg>
-                    </div>
-                    <h2>cāng sè</h2>
-                    <div class="sc-jzJRlG byuKKj"><h2>秋瑾 ·《菩萨蛮·寄女伴》</h2>
-                        <p class="line">「无边家国事 并入双蛾翠」</p></div>
-                </hgroup>
+            <el-col :span="4">
+                <nav class="colorNav">
+                </nav>
             </el-col>
         </el-row>
         <div id="player" class="aplayer" style="width: 20%;"></div>
@@ -106,11 +30,10 @@
             <aside class="colorSet">
                 <div class="sets sc-dnqmqq dhAXtJ" :class="{expand:expandBottom}">
                     <ul>
-                        <li
-                                @click="checkCircle(index)"
-                                :key="index" v-for="(item, index) in circleList"
-                                :class="{selected:checkCircleIndex == index}"
-                                :style='{background:item.rgb}'>{{item.name}}
+                        <li @click="checkCircle(index)"
+                            :key="index" v-for="(item, index) in circleList"
+                            :class="{selected:checkCircleIndex == index}"
+                            :style='{background:item.rgb}'>{{item.name}}
                         </li>
                     </ul>
                     <button class="btn" style="outline: none;" @click="toggleBottomCircle">巜</button>
@@ -208,6 +131,7 @@
         },
         data() {
             return {
+                topC: 0,
                 checkLiIndex: 0,
                 checkCircleIndex: 0,
                 expandBottom: false,
@@ -237,7 +161,6 @@
     }
 </script>
 <style>
-
     .fade-enter-active, .fade-leave-active {
         transition: opacity .5s;
     }
@@ -257,176 +180,6 @@
         transform: translateY(5px);
     }
 
-    .fXyiBz.curr {
-        box-shadow: rgba(0, 0, 0, 0.6) 0 0 4px;
-        text-shadow: black 0 0 10px;
-    }
-
-    .fXyiBz {
-        color: rgb(255, 255, 255);
-        display: flex;
-        flex-direction: row;
-        -webkit-writing-mode: vertical-lr;
-        writing-mode: vertical-lr;
-        cursor: pointer;
-        border-bottom-right-radius: 6px;
-        border-bottom-left-radius: 6px;
-        align-self: flex-start;
-        border-top: 0.4rem solid;
-        padding: 0.5rem 0.2rem 0.4rem;
-        margin: 0.4rem;
-        transition: all 0.5s ease 0s;
-    }
-
-    .fXyiBz .line1 .cmyk {
-        display: flex;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-    }
-
-    .fXyiBz .line1 .cmyk .circle:not(:last-child) {
-        margin-bottom: 0.2rem;
-    }
-
-    .line2 {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        text-transform: uppercase;
-        font-weight: bold;
-        width: 100%;
-        margin-top: 5px;
-        box-sizing: border-box;
-        font-size: 14px;
-    }
-
-    .pinyin {
-        text-transform: capitalize;
-    }
-
-    .fXyiBz .line1 {
-        display: flex;
-        flex-direction: column;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        margin-bottom: 0.6rem;
-        min-height: 6.4rem;
-    }
-
-    .fGWcKV {
-        width: 1.6rem;
-        height: 2.4rem;
-        padding: 0;
-        background: transparent;
-    }
-
-    .eImMjg {
-        margin-bottom: 0.2rem;
-        padding: 0;
-    }
-
-    .eImMjg.percent .circular-chart {
-        min-width: unset;
-        overflow: unset;
-    }
-
-    .eImMjg .circular-chart {
-        display: block;
-        max-width: 2.4rem;
-    }
-
-    .eImMjg.percent .circular-chart .circle-bg {
-        stroke: none;
-    }
-
-    .eImMjg .circular-chart .circle-bg {
-        fill: rgba(255, 255, 255, 0.8);
-        stroke: rgb(238, 238, 238);
-        stroke-width: 4.2;
-    }
-
-    .eImMjg.percent .circular-chart .circle {
-        stroke-width: 8;
-        stroke-linecap: butt;
-    }
-
-    .eImMjg .circular-chart .circle {
-        fill: rgba(255, 255, 255, 0.6);
-        stroke-width: 3.2;
-        stroke-linecap: round;
-        transition: all 1s ease-out 0s;
-    }
-
-    .fXyiBz .line1 .name {
-        -webkit-writing-mode: vertical-lr;
-        writing-mode: vertical-lr;
-        align-self: flex-end;
-        font-size: 1.2rem;
-        font-weight: 800;
-        display: flex;
-        -webkit-box-pack: justify;
-        justify-content: space-between;
-        height: 100%;
-    }
-
-    /*h2 {*/
-    /*    display: block;*/
-    /*    font-size: 1.5em;*/
-    /*    margin-block-start: 0.83em;*/
-    /*    margin-block-end: 0.83em;*/
-    /*    margin-inline-start: 0px;*/
-    /*    margin-inline-end: 0px;*/
-    /*    font-weight: bold;*/
-    /*}*/
-    .colorUl {
-        display: flex;
-        flex-wrap: wrap;
-        align-content: flex-start;
-    }
-
-    .colorUl li {
-        color: rgb(255, 255, 255);
-        display: flex;
-        height: 350px;
-        width: 65px;
-        box-sizing: border-box;
-        flex-direction: row;
-        -webkit-writing-mode: vertical-lr;
-        writing-mode: vertical-lr;
-        cursor: pointer;
-        text-align: -webkit-match-parent;
-        border-bottom-right-radius: 6px;
-        border-bottom-left-radius: 6px;
-        align-self: flex-start;
-        border-top: 0.4rem solid;
-        padding: 0.5rem 0.2rem 0.4rem;
-        margin: 0.4rem;
-        transition: all 0.5s ease 0s;
-    }
-
-    .fXyiBz .line2 .rgb {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .fXyiBz .line2 .rgb .line {
-        width: 2px;
-        height: 9rem;
-        margin: 0px 1px;
-    }
-
-    .fXyiBz .line2 .rgb .line.r {
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 45.8824%, rgba(255, 255, 255, 0.3) 45.8824%, rgba(255, 255, 255, 0.3) 100%);
-    }
-
-    .fXyiBz .line2 .rgb .line.g {
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 52.9412%, rgba(255, 255, 255, 0.3) 52.9412%, rgba(255, 255, 255, 0.3) 100%);
-    }
-
-    .fXyiBz .line2 .rgb .line.b {
-        background-image: linear-gradient(rgb(255, 255, 255) 0%, rgb(255, 255, 255) 54.1176%, rgba(255, 255, 255, 0.3) 54.1176%, rgba(255, 255, 255, 0.3) 100%);
-    }
-
     * {
         margin: 0;
         padding: 0;
@@ -443,7 +196,7 @@
         /*-ms-overflow-style: none;*/
         /*overflow: -moz-scrollbars-none;*/
 
-        background-image: url('./assets/a.jpg');
+        background-image: url('./assets/a.jpeg');
         /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
         background-position: center;
         background-size: cover;
@@ -494,52 +247,19 @@
     }
 
 
-    /**********右边栏***********/
+    /**********左边栏***********/
     .hQSjWe {
-        color: rgb(51, 51, 51);
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
         -webkit-box-align: center;
         align-items: center;
-        box-shadow: rgba(0, 0, 0, 0.5) 0px 0px 8px;
+        box-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
         position: relative;
-        width: 6rem;
-        height: 550px;
-        cursor: default;
-        margin-top: 8rem;
+        width: 7rem;
+        margin-top: 3.8rem;
         margin-right: 0.5rem;
         min-height: 18rem;
         border-radius: 6px;
-        padding: 1rem 0.8rem;
-    }
-
-    .hQSjWe > h1 {
-        color: inherit;
-        font-size: 3.2rem;
-        letter-spacing: -0.5rem;
-        -webkit-writing-mode: vertical-lr;
-        writing-mode: vertical-lr;
-        font-family: TChinese, SimSun, FangSong, STSong, STZhongsong, LiSu, KaiTi, "Microsoft YaHei";
-        transition: transform 0.4s ease-in 0s;
-        margin-block-start: 0.83em;
-        margin-block-end: 0.83em;
-    }
-
-    .eNDZOk {
-        position: absolute;
-        top: 4px;
-        left: 4px;
+        padding: 2rem 1rem 8rem;
         cursor: pointer;
-        display: flex;
-        -webkit-box-pack: center;
-        justify-content: center;
-        -webkit-box-align: center;
-        align-items: center;
-    }
-
-    .hQSjWe > h1:hover {
-        transform: scale(1.1);
     }
 
     .hQSjWe > h2 {
@@ -554,8 +274,7 @@
     }
 
     .byuKKj {
-        color: rgb(255, 255, 235);
-        display: flex;
+        color: rgb(255, 255, 240);
         line-height: 1.4rem;
         margin-top: 1rem;
         text-shadow: rgba(33, 33, 33, 0.6) 0px 0px 4px;
@@ -563,27 +282,24 @@
         animation: 1s ease 0s 1 normal forwards running hbOYnO;
     }
 
-    .byuKKj > h2 {
-        color: inherit;
-        font-size: 0.8rem;
-        letter-spacing: 0.15rem;
-        align-self: flex-end;
-        -webkit-writing-mode: vertical-lr;
-        writing-mode: vertical-lr;
-        margin-right: 0.3rem;
-    }
-
     .byuKKj .line {
         color: inherit;
         -webkit-writing-mode: vertical-lr;
         writing-mode: vertical-lr;
         letter-spacing: 0.4rem;
-        font-size: 16px;
-        font-weight: bold;
+        font-size: 1.4rem;
         position: relative;
         top: 5px;
     }
 
+    .byuKKj .sct {
+        font-size: 14px;
+        font-weight: bold;
+        letter-spacing: 0.2rem;
+        position: relative;
+        top: -9px;
+        margin-right: 7px;
+    }
 
     /*************右侧底部******************/
     .rdiZx .colorSet {
@@ -591,7 +307,7 @@
         bottom: 1rem;
         right: 3rem;
         z-index: 999;
-        padding: 0px 1.7rem;
+        padding: 0 1.7rem;
         color: white;
     }
 

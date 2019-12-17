@@ -217,7 +217,7 @@
         padding: 50px 50px 20px;
         font-size: 16px;
         color: #444;
-        background: rgba(255, 255, 255, 0.9);
+        background: rgba(255, 255, 255, 1);
     }
 
     .title-box {
