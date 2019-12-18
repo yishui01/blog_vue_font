@@ -86,7 +86,7 @@
 
 <style scoped>
     .articleDiv {
-        width: 990px;
+        max-width: 1080px;
         margin: 0 auto;
         margin-bottom: 50px;
         padding: 20px 45px 40px;

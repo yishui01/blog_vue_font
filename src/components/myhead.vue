@@ -61,7 +61,7 @@
     }
 
     .topC .navDiv {
-        padding-top: 8px;
+        padding-top: 7px;
     }
 
     .navDiv {
@@ -90,9 +90,9 @@
 
     .title {
         cursor: pointer;
-        padding: 12px 8px;
+        padding: 12px 8px 18px;
         text-align: center;
-        line-height: 18px;
+        line-height: 13px;
         font-weight: bolder;
         font-size: 1.25rem;
         white-space: nowrap;

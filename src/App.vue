@@ -1,17 +1,15 @@
 <template>
-    <div class="contianer">
+    <div class="contianer allDiv">
         <myhead></myhead>
         <div style="height: 80px;"></div>
         <el-row>
-            <el-col :offset="1" :span="1">
-                <hgroup class=" hQSjWe">
-                    <div class="sc-jzJRlG byuKKj ">
-                        <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
-                        <span class="line">「无边家国事 并入双蛾翠」</span>
-                    </div>
-                </hgroup>
-            </el-col>
-            <el-col :span="16" :offset="2">
+            <hgroup class="hQSjWe">
+                <div class="sc-jzJRlG byuKKj ">
+                    <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
+                    <span class="line">「无边家国事 并入双蛾翠」</span>
+                </div>
+            </hgroup>
+            <el-col :span="16" :offset="4">
                 <div>
                     <keep-alive>
                         <router-view v-if="$route.meta.keepAlive" class="slide"/>
@@ -19,29 +17,9 @@
                     <router-view v-if="!$route.meta.keepAlive" class="slide"/>
                 </div>
             </el-col>
-            <el-col :span="4">
-                <nav class="colorNav">
-                </nav>
-            </el-col>
         </el-row>
         <div id="player" class="aplayer" style="width: 20%;"></div>
-
-        <div class="rdiZx">
-            <aside class="colorSet">
-                <div class="sets sc-dnqmqq dhAXtJ" :class="{expand:expandBottom}">
-                    <ul>
-                        <li @click="checkCircle(index)"
-                            :key="index" v-for="(item, index) in circleList"
-                            :class="{selected:checkCircleIndex == index}"
-                            :style='{background:item.rgb}'>{{item.name}}
-                        </li>
-                    </ul>
-                    <button class="btn" style="outline: none;" @click="toggleBottomCircle">巜</button>
-                </div>
-            </aside>
-        </div>
-        <!--        <myfoot class="footer"></myfoot>-->
-
+        <myfoot class="footer"></myfoot>
     </div>
 </template>
 <script>
@@ -189,13 +167,11 @@
         list-style: none;
     }
 
-    body {
-        /*background-image: url('https://works.yangerxiao.com/chinese-colors/00746b7e611ff49d789bc56df95eba4b.png');*/
-        /*background-image: url('./assets/s.jpg');*/
-        /*transition: background-color 1.6s ease 0s;*/
-        /*-ms-overflow-style: none;*/
-        /*overflow: -moz-scrollbars-none;*/
+    .allDiv {
+        min-height: 1000px;
+    }
 
+    body {
         background-image: url('./assets/a.jpeg');
         /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
         background-position: center;
@@ -203,13 +179,7 @@
         background-attachment: fixed;
     }
 
-    /**去掉滚动条但不影响滚动**/
-    .colorNav::-webkit-scrollbar {
-        display: none;
-    }
-
     .footer {
-        background: black;
         bottom: 0;
         width: 100%;
     }
@@ -229,30 +199,14 @@
         }
     }
 
-    /******左边栏*****/
-    .colorNav {
-        position: relative;
-        height: 100vh;
-        width: 100%;
-        padding-top: 20px;
-        box-sizing: border-box;
-        padding-left: 1.5rem;
-        vertical-align: baseline;
-        border-style: initial;
-        border-color: initial;
-        border-image: initial;
-        font: inherit;
-        overflow-y: scroll;
-        margin-bottom: 50px;
-    }
-
-
     /**********左边栏***********/
     .hQSjWe {
+        position: absolute;
+        left: 6%;
         -webkit-box-align: center;
         align-items: center;
         box-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
-        position: relative;
+        box-sizing: border-box;
         width: 7rem;
         margin-top: 3.8rem;
         margin-right: 0.5rem;

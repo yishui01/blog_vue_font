@@ -8,27 +8,32 @@ export default new Router({
         {
             path: '/',
             name: 'home',
-            component: () => import('./views/Home.vue')
+            component: () => import('./views/Home')
         },
         {
             path: '/rain',
             name: 'rain',
-            component: () => import('./components/Rain.vue')
+            component: () => import('./components/Rain')
         },
         {
             path: '/art',
             name: 'art',
-            component: () => import('./views/Article.vue')
+            component: () => import('./views/Article')
         },
         {
             path: '/video',
             name: 'video',
-            component: () => import('./views/Video.vue')
+            component: () => import('./views/Video')
         },
         {
             path: '/link',
             name: 'link',
-            component: () => import('./views/Link.vue')
+            component: () => import('./views/Link')
+        },
+        {
+            path: '/message',
+            name: 'message',
+            component: () => import('./views/Message')
         },
         {
             path: '/load',

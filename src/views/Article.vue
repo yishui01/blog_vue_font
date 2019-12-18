@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-show="isLoad" style="text-align: center;padding-left: 45%;padding-top: 100px;">
+        <div v-show="isLoad" style="text-align: center;padding-left: 45%;padding-top: 100px;height: 1000px;">
             <load></load>
         </div>
         <transition name="fade">
