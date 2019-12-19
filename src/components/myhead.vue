@@ -14,8 +14,6 @@
                         {{item.name}}
                         </span>
                     <span class="loginSpan navItem" @click="$to('/login')">登录</span>
-                    /
-                    <span class="loginSpan navItem" @click="$to('/register')">注册</span>
                      </span>
                 </div>
             </el-col>
