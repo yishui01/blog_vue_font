@@ -1,25 +1,27 @@
 <template>
-    <div class="contianer allDiv">
-        <myhead></myhead>
-        <div style="height: 80px;"></div>
-        <el-row>
-            <hgroup class="hQSjWe">
-                <div class="sc-jzJRlG byuKKj ">
-                    <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
-                    <span class="line">「无边家国事 并入双蛾翠」</span>
-                </div>
-            </hgroup>
-            <el-col :span="16" :offset="4">
-                <div>
-                    <keep-alive>
-                        <router-view v-if="$route.meta.keepAlive" class="slide"/>
-                    </keep-alive>
-                    <router-view v-if="!$route.meta.keepAlive" class="slide"/>
-                </div>
-            </el-col>
-        </el-row>
-        <div id="player" class="aplayer" style="width: 20%;"></div>
-        <myfoot class="footer"></myfoot>
+    <div>
+        <div class="contianer allDiv" style="overflow: auto">
+            <myhead></myhead>
+            <div style="height: 80px;"></div>
+            <el-row>
+                <hgroup class="hQSjWe">
+                    <div class="sc-jzJRlG byuKKj ">
+                        <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
+                        <span class="line">「无边家国事 并入双蛾翠」</span>
+                    </div>
+                </hgroup>
+                <el-col :span="16" :offset="4">
+                    <div>
+                        <keep-alive>
+                            <router-view v-if="$route.meta.keepAlive" class="slide"/>
+                        </keep-alive>
+                        <router-view v-if="!$route.meta.keepAlive" class="slide"/>
+                    </div>
+                </el-col>
+            </el-row>
+            <div id="player" class="aplayer" style="width: 20%;"></div>
+            <myfoot class="footer"></myfoot>
+        </div>
     </div>
 </template>
 <script>
@@ -91,49 +93,10 @@
             })
 
         },
-        watch: {
-            checkLiIndex(newVal) {
-                document.querySelector('body').setAttribute('style', 'background-color:' + this.colorList[newVal].background + ';')
-            }
-        },
-        methods: {
-            checkLi(index) {
-                this.checkLiIndex = index
-            },
-            checkCircle(index) {
-                this.checkCircleIndex = index
-            },
-            toggleBottomCircle() {
-                this.expandBottom = !this.expandBottom
-            }
-        },
+        methods: {},
         data() {
             return {
                 topC: 0,
-                checkLiIndex: 0,
-                checkCircleIndex: 0,
-                expandBottom: false,
-                colorList: [
-                    {background: "white"},
-                    {background: "gray"},
-                    {background: "lightgray"},
-                    {background: "black"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                ],
-                circleList: [
-                    {rgb: "rgb(255, 179, 167)", name: "红"},
-                    {rgb: "rgb(10, 163, 68)", name: "绿"},
-                    {rgb: "rgb(68, 206, 246)", name: "蓝"},
-                    {rgb: "rgb(117, 135, 138)", name: "苍"},
-                    {rgb: "rgb(210, 240, 244)", name: "水"},
-                    {rgb: "rgb(240, 240, 244)", name: "灰白"},
-                    {rgb: "rgb(0, 0, 0)", name: "黑"},
-                    {rgb: "rgb(234, 205, 118)", name: "金银"},
-                ]
             }
         }
     }
@@ -326,6 +289,25 @@
 
     .dhAXtJ ul > li.selected {
         transform: translateY(-1.6rem);
+    }
+
+
+    ::-webkit-scrollbar {
+        width: 10px;
+        height: 10px;
+        overflow: auto;
+    }
+
+    ::-webkit-scrollbar-thumb {
+        background-color: #e6e6e6;
+        min-height: 25px;
+        min-width: 25px;
+        border: 1px solid #e0e0e0;
+    }
+
+    ::-webkit-scrollbar-track {
+        background-color: #f7f7f7;
+        border: 1px solid #efefef;
     }
 
 </style>

@@ -13,11 +13,55 @@
                               :class="{active:$route.path==item.url}">
                         {{item.name}}
                         </span>
-                    <span class="loginSpan navItem" @click="$to('/login')">登录</span>
+                    <span class="loginSpan navItem" @click="showLogin">登录</span>
                      </span>
                 </div>
             </el-col>
         </el-row>
+
+        <div v-if="dialogVisible"
+             @click="hideLogin"
+             style="width: 100%;
+    height: 100%;
+    position: fixed;
+     z-index: 999;
+    opacity: .5;
+    background: #000;
+    left: 0;
+    top: 0;">
+        </div>
+        <div v-if="dialogVisible"
+             id="loginDiv"
+             class="loginDiv" :class="{g:dialogVisibles}">
+            asdasdasddsa
+        </div>
+
+        <!--        <el-dialog-->
+        <!--                title="第三方登录"-->
+        <!--                :lock-scroll="lockScroll"-->
+        <!--                :visible.sync="dialogVisible"-->
+        <!--                width="30%">-->
+        <!--            <div>-->
+        <!--                <div style="-->
+        <!--                        cursor: pointer;-->
+        <!--                        margin-right: 20px;-->
+        <!--                        display:inline-block;-->
+        <!--                        border-radius: 5px;-->
+        <!--                        text-align:center;color:white;padding:10px 10px;-->
+        <!--                        width: 200px;background: #3d4852;">Github-->
+        <!--                    登录-->
+        <!--                </div>-->
+        <!--                <div style="-->
+        <!--                        cursor: pointer;-->
+        <!--                        display:inline-block;-->
+        <!--                        border-radius: 5px;-->
+        <!--                        text-align:center;color:white;padding:10px 10px;-->
+        <!--                        width: 200px;background: #3d4852;">Github-->
+        <!--                    登录-->
+        <!--                </div>-->
+        <!--            </div>-->
+
+        <!--        </el-dialog>-->
     </div>
 </template>
 
@@ -27,6 +71,9 @@
         data() {
             return {
                 topC: 0,
+                dialogVisibles: false,
+                dialogVisible: false,
+                lockScroll: false,
                 nav: [
                     {name: '文章', url: '/', icon: 'ios-book'},
                     {name: '视频', url: '/video', icon: 'md-beer'},
@@ -40,6 +87,30 @@
             window.addEventListener('scroll', this.appScroll)
         },
         methods: {
+            showLogin() {
+                this.dialogVisible = true
+                //阻止浏览器事件
+                document.addEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
+                document.addEventListener('mousewheel', this.fixScroll, {passive: false});
+            },
+            hideLogin() {
+                this.dialogVisible = false
+                document.removeEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
+                document.removeEventListener('mousewheel', this.fixScroll, {passive: false});
+            },
+            fixScroll(evt) {
+                evt = evt || window.event;
+                if (evt.preventDefault) {
+                    // Firefox
+                    evt.preventDefault();
+                    evt.stopPropagation();
+                } else {
+                    // IE
+                    evt.cancelBubble = true;
+                    evt.returnValue = false;
+                }
+                return false;
+            },
             appScroll() {
                 let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
                 if (scrollTop > 100) {
@@ -83,7 +154,7 @@
         top: 0;
         right: 0;
         left: 0;
-        z-index: 1030;
+        z-index: 500;
     }
 
     .title {
@@ -115,4 +186,44 @@
     .loginSpan {
         cursor: pointer;
     }
+
+    @keyframes mymove {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(2);
+        }
+    }
+
+    @-webkit-keyframes mymove /* Safari 与 Chrome */
+    {
+        0% {
+            transform: scale(1);
+        }
+        100% {
+            transform: scale(2);
+        }
+    }
+
+    .loginDiv {
+        position: fixed;
+        z-index: 1000;
+        opacity: 1;
+        top: 20%;
+        left: 40%;
+        color: white;
+        width: 200px;
+        height: 300px;
+        border: 1px solid white;
+        transition: .5s;
+        animation: mymove .3s;
+        -webkit-animation: mymove .3s; /* Safari 和 Chrome */
+    }
+
+    .g {
+        transform: rotate(50deg);
+        width: 400px;
+    }
+
 </style>
