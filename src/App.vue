@@ -1,8 +1,10 @@
 <template>
-    <div class="contianer allDiv">
+    <div id="holder" class="contianer allDiv">
+        <canvas id="canvas" width="1920" height="1060" style="position: fixed;"></canvas>
         <myhead></myhead>
+
         <div style="height: 80px;"></div>
-        <el-row>
+        <el-row style="pointer-events: auto;">
             <hgroup class="hQSjWe">
                 <div class="sc-jzJRlG byuKKj ">
                     <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
@@ -25,6 +27,7 @@
 <script>
     import myhead from '@/components/myhead'
     import myfoot from '@/components/myfoot'
+    import {wave, requestAnimationFrame} from './assets/js/wave';
     import 'aplayer/dist/APlayer.min.css';
     import APlayer from 'aplayer';
 
@@ -34,7 +37,58 @@
             myhead,
             myfoot
         },
+        data() {
+            return {
+                topC: 0,
+                checkLiIndex: 0,
+                checkCircleIndex: 0,
+                expandBottom: false,
+            }
+        },
         mounted() {
+            var settings = {
+                image: 'https://app.smartnail.cn/test/a.jpeg',//image path
+                //image: 'https://img.smartnail.cn/3c8d53da81cb39dbbad8b4d8d6160924aa1830e9.jpg',//image path
+                //image: './assets/a.jpg',//image path
+                dropRadius: 3,//radius of the ripple
+                width: 800,//width
+                height: 500,//height
+                delay: 1,//if auto param === true. 1 === 1 second delay for animation
+                auto: 0//if auto param === true, animation starts on it´s own
+            }
+            let cvs = document.getElementById("canvas")
+
+            // cvs.width = document.body.clientWidth;
+            // cvs.height = document.body.clientHeight;
+
+            let w = new wave(cvs, settings)
+            w.init()
+            //document.getElementById('holder').addEventListener('click', function (e) {
+            window.addEventListener('click', function (e) {
+                var mouseX = e.clientX;
+                var mouseY = e.clientY;
+                w.disturb(mouseX, mouseY);
+
+            });
+
+
+            //on mousemove
+            //document.getElementById('holder').addEventListener('mousemove', function (e) {
+            window.addEventListener('mousemove', function (e) {
+                var mouseX = e.clientX;
+                var mouseY = e.clientY;
+                w.disturb(mouseX, mouseY);
+
+            });
+
+            document.onkeydown = function (e) {
+                var event = e || window.event || arguments.callee.caller.arguments[0];
+                if (event && event.keyCode == 13) { // enter 键
+                    w.disturb(200, 200);
+
+                }
+            }
+
             //document.querySelector('body').setAttribute('style', 'background-color:#75878a;')
             // Since `APlayer2` and `APlayer3` are not the same, the `mutex` option is useless
             new APlayer({
@@ -105,35 +159,6 @@
             },
             toggleBottomCircle() {
                 this.expandBottom = !this.expandBottom
-            }
-        },
-        data() {
-            return {
-                topC: 0,
-                checkLiIndex: 0,
-                checkCircleIndex: 0,
-                expandBottom: false,
-                colorList: [
-                    {background: "white"},
-                    {background: "gray"},
-                    {background: "lightgray"},
-                    {background: "black"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                    {background: "lightblue"},
-                ],
-                circleList: [
-                    {rgb: "rgb(255, 179, 167)", name: "红"},
-                    {rgb: "rgb(10, 163, 68)", name: "绿"},
-                    {rgb: "rgb(68, 206, 246)", name: "蓝"},
-                    {rgb: "rgb(117, 135, 138)", name: "苍"},
-                    {rgb: "rgb(210, 240, 244)", name: "水"},
-                    {rgb: "rgb(240, 240, 244)", name: "灰白"},
-                    {rgb: "rgb(0, 0, 0)", name: "黑"},
-                    {rgb: "rgb(234, 205, 118)", name: "金银"},
-                ]
             }
         }
     }
