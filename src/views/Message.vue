@@ -7,18 +7,21 @@
                     留言
                 </p>
             </div>
+
             <!-- 评论 -->
             <div class="commentMain">
-                <h3>你想说些什么呢？就在这里回复吧~ ٩(ˊᗜˋ*)و </h3>
-                <h3>欢迎灌水，来者不拒(☆ω☆)</h3>
+                <h3>
+                    <img src="https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/smilies/huaji.png">
+                    欢迎灌水，来者不拒(☆ω☆)
+                    <img src="https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/smilies/yinxian.png">
 
+                </h3>
+                <reply />
                 <div class="commTop">
                     <span style="color: #2a2e2e;font-size:15px;font-weight: 700;">1716 Comments</span>
                 </div>
                 <div>
-                    <comment></comment>
-                    <comment></comment>
-                    <comment></comment>
+                    <comment v-for="(item,index) in comments" :key="index" :content="item"></comment>
                 </div>
             </div>
         </div>
@@ -27,40 +30,19 @@
 
 <script>
     import comment from '@/components/Comment'
+    import reply from '@/components/Reply'
+    import {transOwO} from "../utils/comment";
 
     export default {
         components: {
-            comment
+            comment,
+            reply
         },
+
         data() {
             return {
                 loading: true,
-                links: [
-                    {
-                        url: 'http://www.golang365.com/#/link',
-                        img: 'https://avatars1.githubusercontent.com/u/8437554?s=460&v=4',
-                        title: '水墨寒',
-                        desc: '90后双鱼座普通逗比男青年，目前专注于前端与PHP技术的学习。'
-                    },
-                    {
-                        url: 'http://www.golang365.com/#/link',
-                        img: 'https://avatars1.githubusercontent.com/u/8437554?s=460&v=4',
-                        title: '水墨寒',
-                        desc: '90后双鱼座普通逗比男青年，目前专注于前端与PHP技术的学习。'
-                    },
-                    {
-                        url: 'http://www.golang365.com/#/link',
-                        img: 'https://avatars1.githubusercontent.com/u/8437554?s=460&v=4',
-                        title: '水墨寒',
-                        desc: '90后双鱼座普通逗比男青年，目前专注于前端与PHP技术的学习。'
-                    },
-                    {
-                        url: 'http://www.golang365.com/#/link',
-                        img: 'https://avatars1.githubusercontent.com/u/8437554?s=460&v=4',
-                        title: '水墨寒',
-                        desc: '90后双鱼座普通逗比男青年，目前专注于前端与PHP技术的学习。'
-                    }
-                ],
+                comments:[],
                 pageModel: {
                     page: 1,
                     all: 1,
@@ -70,13 +52,22 @@
         },
         computed: {},
         created() {
-            this.getLink()
+            this.comments = this.getComment()
         },
         methods: {
             // 获取留言 all=1请求所有，不加的话请求的是有效期内的
-            getLink() {
-
-            }
+            getComment() {
+                var data =  [
+                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~',
+                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~',
+                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~'
+                ]
+                //循环替换data中的表情
+                data.forEach((item,index)=>{
+                    data[index] = transOwO(item,this.$owo)
+                })
+                return data
+            },
         }
     }
 </script>
@@ -86,9 +77,8 @@
         height: 65px;
         border-radius: 50%;
     }
-
-    * {
-        box-sizing: border-box;
+    img{
+        vertical-align: middle
     }
 
     .messageContent {

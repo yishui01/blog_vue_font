@@ -22,7 +22,7 @@
 <!-----------------------------------------遮罩、弹框---------------------------------------------------->
         <div v-if="divVis" @click="hideLogin" class="mask"></div>
 
-        <div class="loginDiv" :class="{showDia:winVis}">
+        <div v-show="divVis" class="loginDiv" :class="{showDia:winVis}">
             <div class="card" id="loginDiv" @mousedown="down" @mouseup="up">
                 <div class="front">
                     <div style="width: 100%;text-align: center;">
@@ -125,7 +125,9 @@
             //登录弹出框时，禁止滚动
             showLogin() {
                 this.divVis = true
-                this.winVis = true
+                setTimeout(()=>{
+                    this.winVis = true  //这里要等divVis把元素显示出来后，再挂另一个class，trasition才会触发，一次性挂上去直接秒出不会动画
+                },50)
                 //阻止浏览器事件
                 document.addEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
                 document.addEventListener('mousewheel', this.fixScroll, {passive: false});
@@ -134,7 +136,7 @@
                 this.winVis = false
                 setTimeout(()=>{
                     this.divVis = false
-                },100)
+                },120)
                 document.removeEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
                 document.removeEventListener('mousewheel', this.fixScroll, {passive: false});
 
@@ -363,7 +365,7 @@
 
     .loginDiv {
         position: fixed;
-        z-index: 1000;
+
         top: 20%;
         left: 40%;
         width: 400px;
@@ -371,17 +373,17 @@
         border-radius: 5px;
         text-align: center;
         perspective: 1000px;
+        z-index: 1000;
 
         -webkit-transform: scale(.7);
         -moz-transform: scale(.7);
         -ms-transform: scale(.7);
         transform: scale(.7);
+        visibility: hidden;
         opacity: 0;
         -webkit-transition: transform .3s,opacity .3s;
         -moz-transition: transform .3s,opacity .3s;
         transition: transform .3s,opacity .3s;
-        visibility: visible;
-
         -moz-user-select: none;
         -khtml-user-select: none;
         -webkit-user-select: none;
@@ -390,11 +392,11 @@
 
     .showDia{
         visibility: visible;
+        opacity: 1;
         -webkit-transform: scale(1);
         -moz-transform: scale(1);
         -ms-transform: scale(1);
         transform: scale(1);
-        opacity: 1;
     }
 
     .card{

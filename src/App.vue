@@ -126,6 +126,31 @@
         padding: 0;
     }
 
+    body {
+        font-family: -apple-system, BlinkMacSystemFont, opensans, Optima, "Microsoft Yahei", sans-serif;
+        background: #f5f5f5;
+        font-weight: 300;
+        overflow-x: hidden;
+        margin: 0;
+        cursor: url(https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/pointer.cur), auto;
+    }
+
+    button, input, optgroup, select, textarea {
+        color: inherit;
+        font: inherit;
+        font-style: inherit;
+        font-variant-ligatures: inherit;
+        font-variant-caps: inherit;
+        font-variant-numeric: inherit;
+        font-variant-east-asian: inherit;
+        font-weight: inherit;
+        font-stretch: inherit;
+        font-size: inherit;
+        line-height: inherit;
+        font-family: inherit;
+        margin: 0;
+    }
+
     ul {
         list-style: none;
     }

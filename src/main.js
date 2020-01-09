@@ -15,6 +15,7 @@ Vue.use(Col)
 Vue.use(Dialog)
 
 Vue.config.productionTip = false
+Vue.prototype.$owo = require('./assets/json/owo') //表情映射
 
 Vue.prototype.$to = (path, param) => {
     router.push({path: path, query: param})

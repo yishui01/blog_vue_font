@@ -12,10 +12,8 @@
                     <span class="dsqjs-bullet"></span>
                     <time style="font-size: 12px;color: #656c7a;">2019-10-10 15:36</time>
                 </div>
-                <div style="font-size: 15px; line-height: 1.5; word-wrap: break-word; overflow: hidden;color: #555;">
-                    想加大群结果点错了申请了小群，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~
-                    如果只有电报群，也请评论告诉我一下下~
-                    另外我是以前的群员，只是举报风波让我迷了路。
+                <div v-html="content" class="commContent"
+                     style="font-size: 15px; line-height: 1.5; word-wrap: break-word; overflow: hidden;color: #555;">
                 </div>
 
             </div>
@@ -26,6 +24,12 @@
 <script>
     export default {
         name: "Comment",
+        props:{
+            content:{
+                type:String,
+                default:''
+            }
+        },
         data() {
             return {
                 comm: [

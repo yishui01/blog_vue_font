@@ -45,5 +45,10 @@ export default new Router({
             name: 'load2',
             component: () => import('./components/RotateLoading')
         },
+        {
+            path: '/reply',
+            name: 'reply',
+            component: () => import('./components/Reply')
+        },
     ]
 })
