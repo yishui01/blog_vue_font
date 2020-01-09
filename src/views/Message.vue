@@ -16,12 +16,12 @@
                     <img src="https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/smilies/yinxian.png">
 
                 </h3>
-                <reply />
+                <reply @submit="addReply"/>
                 <div class="commTop">
                     <span style="color: #2a2e2e;font-size:15px;font-weight: 700;">1716 Comments</span>
                 </div>
                 <div>
-                    <comment v-for="(item,index) in comments" :key="index" :content="item"></comment>
+                    <comment v-for="(item) in comments" :key="item.id" :content="item.content"></comment>
                 </div>
             </div>
         </div>
@@ -42,7 +42,7 @@
         data() {
             return {
                 loading: true,
-                comments:[],
+                comments: [],
                 pageModel: {
                     page: 1,
                     all: 1,
@@ -55,29 +55,36 @@
             this.comments = this.getComment()
         },
         methods: {
-            // 获取留言 all=1请求所有，不加的话请求的是有效期内的
-            getComment() {
-                var data =  [
-                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~',
-                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~',
-                    ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~'
-                ]
-                //循环替换data中的表情
-                data.forEach((item,index)=>{
-                    data[index] = transOwO(item,this.$owo)
-                })
-                return data
+            addReply(content) {
+                let arr = this.comments
+                arr.unshift({id: (new Date()).getTime(), content: this.transCom(content)})
+                this.comments = arr
             },
+            getComment() {
+                var data = [
+                    {id: '1', content: ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~'},
+                    {id: '2', content: ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~'},
+                    {id: '3', content: ':hehe: 想加大群结果点错了申请了小群:han:，我来是想问谁可以把我拉进大群吗？2365858148，感激不尽呀~'}
+                ]
+                return this.transCom(data)
+            },
+            //循环替换data中的表情
+            transCom(data) {
+                if (data instanceof Array) {
+                    data.forEach((item, index) => {
+                        data[index].content = transOwO(item.content, this.$owo)
+                    })
+                } else {
+                    data = transOwO(data, this.$owo)
+                }
+                return data
+            }
         }
     }
 </script>
 <style scoped>
-    .avatarImg {
-        width: 65px;
-        height: 65px;
-        border-radius: 50%;
-    }
-    img{
+
+    img {
         vertical-align: middle
     }
 

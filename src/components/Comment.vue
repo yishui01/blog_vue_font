@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div style="text-align: left;margin-bottom: 60px;clear: both;">
+        <div class="commP">
             <div class="avatarDiv" style="float: left;">
                 <img class="avatarImg"
                      src="https://c.disquscdn.com/uploads/forums/533/4564/avatar92.jpg?1551538952">
@@ -15,19 +15,24 @@
                 <div v-html="content" class="commContent"
                      style="font-size: 15px; line-height: 1.5; word-wrap: break-word; overflow: hidden;color: #555;">
                 </div>
-
+                <mybut style="float: right" text="回复" @click.native="submitCom"/>
             </div>
         </div>
     </div>
 </template>
 
 <script>
+    import mybut from '@/components/Button'
+
     export default {
         name: "Comment",
-        props:{
-            content:{
-                type:String,
-                default:''
+        components: {
+            mybut
+        },
+        props: {
+            content: {
+                type: String,
+                default: ''
             }
         },
         data() {
@@ -42,6 +47,28 @@
 </script>
 
 <style scoped>
+    @-webkit-keyframes coma {
+        0% {
+            opacity: 0;
+            -webkit-transform: translateY(-30px);
+            transform: translateY(-30px);
+        }
+        100% {
+            opacity: 1;
+            -webkit-transform: translateY(0);
+            transform: translateY(0);
+        }
+    }
+
+    .commP {
+        transition: 1s;
+        text-align: left;
+        margin-bottom: 60px;
+        clear: both;
+        -webkit-animation: coma 1s ease-in-out;
+        animation: coma 1s ease-in-out;
+    }
+
     .avatarImg {
         width: 65px;
         height: 65px;
