@@ -23,7 +23,7 @@
                                 <div class="OwO-logo" @click="owoOpen=!owoOpen"><span>OωO表情</span></div>
                                 <mybut style="float: right" text="发表评论" @click.native="submitCom"/>
                                 <div class="OwO-body" style="width: 90%">
-                                    <div @click="owoOpen=!owoOpen">
+                                    <div>
                                         <ul v-for="(item,key,index) in owo" :key="index"
                                             class="OwO-items"
                                             :class="[owoTab == index ? 'OwO-items-show' :'','OwO-items-'+item.type]"
@@ -59,9 +59,6 @@
                 </div>
 
             </div>
-            <div style="text-align: right;">
-
-            </div>
         </div>
     </div>
 
@@ -72,6 +69,12 @@
 
     export default {
         name: "Reply",
+        props:{
+            id:{ //该回复所属的评论id
+                type:String,
+                default:''
+            }
+        },
         components: {
             mybut
         },
@@ -87,12 +90,19 @@
             this.owo = this.$owo
         },
         methods: {
+            //发表评论
+            submitCom() {
+                if (!this.content.match(/\S/)){
+                    alert('请输入评论')
+                    return
+                }
+                this.$emit('submit', {pid:this.id,content:this.content})
+                this.content = ''
+            },
+            //添加表情
             addOwO(owo) {
                 this.content = this.content + owo.replace(/'/g, " ")
-            },
-            submitCom() {
-                this.$emit('submit', this.content)
-                this.content = ''
+                this.owoOpen = !this.owoOpen
             },
             login() {
 

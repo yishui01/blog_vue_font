@@ -127,12 +127,18 @@
     }
 
     body {
+        min-height: 1500px;
         font-family: -apple-system, BlinkMacSystemFont, opensans, Optima, "Microsoft Yahei", sans-serif;
         background: #f5f5f5;
         font-weight: 300;
         overflow-x: hidden;
         margin: 0;
         cursor: url(https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/pointer.cur), auto;
+        background-image: url('./assets/a.jpeg');
+        /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
+        background-position: center;
+        background-size: cover;
+        background-attachment: fixed;
     }
 
     button, input, optgroup, select, textarea {
@@ -157,14 +163,6 @@
 
     .allDiv {
         min-height: 1000px;
-    }
-
-    body {
-        background-image: url('./assets/a.jpeg');
-        /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
-        background-position: center;
-        background-size: cover;
-        background-attachment: fixed;
     }
 
     .footer {
