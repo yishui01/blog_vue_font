@@ -21,7 +21,7 @@
                             <!-- 表情-->
                             <div class="OwO" :class="{'OwO-open':owoOpen}">
                                 <div class="OwO-logo" @click="owoOpen=!owoOpen"><span>OωO表情</span></div>
-                                <mybut style="float: right" text="发表评论" @click.native="submitCom"/>
+                                <btn1 style="float: right" text="发表评论" @click.native="submitCom"/>
                                 <div class="OwO-body" style="width: 90%">
                                     <div>
                                         <ul v-for="(item,key,index) in owo" :key="index"
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-    import mybut from '@/components/Button'
+    import btn1 from '@/components/Btn1'
 
     export default {
         name: "Reply",
@@ -76,7 +76,7 @@
             }
         },
         components: {
-            mybut
+            btn1
         },
         data() {
             return {

@@ -100,11 +100,11 @@
                     '孩子别登了，快写作业去吧',
                 ],
                 nav: [
-                    {name: '文章', url: '/', icon: 'ios-book'},
-                    {name: '视频', url: '/video', icon: 'md-beer'},
-                    {name: '友链', url: '/link', icon: 'md-beer'},
-                    {name: '关于我', url: '/about', icon: 'md-beer'},
-                    {name: '留言', url: '/message', icon: 'md-chatboxes'},
+                    {name: '文章', url: '/'},
+                    {name: '视频', url: '/video'},
+                    {name: '友链', url: '/link'},
+                    {name: '关于', url: '/about'},
+                    {name: '留言', url: '/message'},
                 ]
             }
         },

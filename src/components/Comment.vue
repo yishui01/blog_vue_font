@@ -5,21 +5,21 @@
                 <img class="avatarImg"
                      src="https://c.disquscdn.com/uploads/forums/533/4564/avatar92.jpg?1551538952">
             </div>
-            <div class="bodyDiv"
-                 style="margin-left: 80px;padding-top: 5px;text-align: left;padding-bottom: 6px;">
-                <div style="line-height: 1;font-size: 14px;margin-bottom: 3px;">
-                    <span style="color:#076dd0;font-weight:700;">BABY熊</span>
-                    <span class="dsqjs-bullet"></span>
-                    <time style="font-size: 12px;color: #656c7a;">2019-10-10 15:36</time>
+            <div class="contentDiv">
+                <div class="c-head">
+                    <span class="name">BABY熊</span>
+                    <span class="point"></span>
+                    <time class="time">2019-10-10 15:36</time>
                 </div>
-                <div v-html="item.content" class="commContent"
-                     style="font-size: 15px; line-height: 1.5; word-wrap: break-word; overflow: hidden;color: #555;">
-                </div>
+                <div v-html="item.content" class="commText"/>
+
                 <btn2 style="float: right;" text="回复" @click.native="clickRepBtn(item.id)"/>
-                <!--最外层评论回复框，回复框的提交事件和子评论的评论事件都是往外抛，直接一个replyCom方法监听即可-->
-                <replybox :id="item.id" @submit='replyCom' v-if="showRyBox(item.id)" style="clear: both;margin-top: 35px;"/>
+                <!--评论回复框-->
+                <replybox :id="item.id" @submit='replyCom' v-if="showRyBox(item.id)"
+                          style="clear: both;margin-top: 35px;"/>
                 <!--子评论dfs-->
-                <Comment @reply='replyCom' v-if="item.children && item.children.length>0" :comments="item.children"></Comment>
+                <Comment @reply='replyCom' v-if="item.children && item.children.length>0"
+                         :comments="item.children"></Comment>
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
         props: {
             comments: {
                 type: Array,
-                default(){
+                default() {
                     return []
                 }
             }
@@ -46,18 +46,18 @@
         data() {
             return {}
         },
-        methods:{
-            replyCom(obj){
-                this.$emit('reply',obj)
+        methods: {
+            replyCom(obj) {
+                this.$emit('reply', obj)
             },
-            showRyBox(id){
+            showRyBox(id) {
                 return id == this.$store.state.repId
             },
-            clickRepBtn(id){
-                if (id == this.$store.state.repId){
-                    this.$store.commit('REPCLICK',-1)
+            clickRepBtn(id) {
+                if (id == this.$store.state.repId) {
+                    this.$store.commit('REPCLICK', -1)
                 } else {
-                    this.$store.commit('REPCLICK',id)
+                    this.$store.commit('REPCLICK', id)
                 }
             }
         }
@@ -78,6 +78,49 @@
         }
     }
 
+
+    .c-head {
+        line-height: 1;
+        font-size: 14px;
+        margin-bottom: 3px;
+    }
+
+    .c-head .name {
+        color: #076dd0;
+        font-weight: 700;
+    }
+
+    .c-head .point {
+        line-height: 1.4;
+        margin: 0 2px;
+    }
+
+    .c-head .point::after {
+        color: #c2c6cc;
+        content: "·";
+        font-weight: 700;
+    }
+
+    .c-head .time {
+        font-size: 12px;
+        color: #656c7a;
+    }
+
+    .contentDiv {
+        margin-left: 80px;
+        padding-top: 5px;
+        text-align: left;
+        padding-bottom: 6px;
+    }
+
+    .commText {
+        font-size: 15px;
+        line-height: 1.5;
+        word-wrap: break-word;
+        overflow: hidden;
+        color: #555;
+    }
+
     .commP {
         transition: .3s;
         text-align: left;
@@ -87,10 +130,12 @@
         -webkit-animation: coma 1s ease-in-out;
         animation: coma 1s ease-in-out;
     }
-    .commP:hover{
+
+    .commP:hover {
         background: #f5f5f5;
     }
-    .commClick{
+
+    .commClick {
         background: #f5f5f5;
     }
 
@@ -100,14 +145,5 @@
         border-radius: 50%;
     }
 
-    .dsqjs-bullet {
-        line-height: 1.4;
-        margin: 0 2px;
-    }
 
-    .dsqjs-bullet::after {
-        color: #c2c6cc;
-        content: "·";
-        font-weight: 700;
-    }
 </style>
