@@ -1,6 +1,11 @@
-// import Cookies from 'js-cookie'
+import Cookies from 'js-cookie'
 
 const TokenKey = 'vue_admin_template_token'
+const CSRFKey = '_csrf'
+
+export function getCsrfToken() {
+  return Cookies.get(CSRFKey)
+}
 
 export function getToken() {
   // return Cookies.get(TokenKey)
@@ -17,9 +22,4 @@ export function removeToken() {
   return localStorage.removeItem(TokenKey)
 }
 
-export function getWebSocketToken() {
-  return storeReq({
-    url: '/dashboard/token',
-    method: 'post'
-  })
-}
+

@@ -1,139 +1,141 @@
 <template>
-  <div class="login-container">
-    <el-form
-      ref="loginForm"
-      :model="loginForm"
-      :rules="loginRules"
-      class="login-form"
-      auto-complete="on"
-      label-position="left">
-      <h3 class="title">{{ title }}</h3>
-      <el-form-item prop="username">
+    <div class="login-container">
+        <el-form
+                ref="loginForm"
+                :model="loginForm"
+                :rules="loginRules"
+                class="login-form"
+                auto-complete="on"
+                label-position="left">
+            <h3 class="title">{{ title }}</h3>
+            <el-form-item prop="username">
         <span class="svg-container">
           <svg-icon icon-class="user"/>
         </span>
-        <el-input
-          v-model="loginForm.username"
-          name="username"
-          type="text"
-          auto-complete="on"
-          placeholder="username"/>
-      </el-form-item>
-      <el-form-item prop="password">
+                <el-input
+                        v-model="loginForm.username"
+                        name="username"
+                        type="text"
+                        auto-complete="on"
+                        placeholder="username"/>
+            </el-form-item>
+            <el-form-item prop="password">
         <span class="svg-container">
           <svg-icon icon-class="password"/>
         </span>
-        <el-input
-          :type="pwdType"
-          v-model="loginForm.password"
-          name="password"
-          auto-complete="on"
-          placeholder="password"
-          @keyup.enter.native="handleLogin"/>
-        <span class="show-pwd" @click="showPwd">
+                <el-input
+                        :type="pwdType"
+                        v-model="loginForm.password"
+                        name="password"
+                        auto-complete="on"
+                        placeholder="password"
+                        @keyup.enter.native="handleLogin"/>
+                <span class="show-pwd" @click="showPwd">
           <svg-icon :icon-class="pwdType === 'password' ? 'eye' : 'eye-open'"/>
         </span>
-      </el-form-item>
-      <el-form-item>
-        <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
-          登录
-        </el-button>
-      </el-form-item>
-      <!--<div class="tips">-->
-      <!--<span style="margin-right:20px;">username: admin</span>-->
-      <!--<span> password: admin</span>-->
-      <!--</div>-->
-    </el-form>
-  </div>
+            </el-form-item>
+            <el-form-item>
+                <el-button :loading="loading" type="primary" style="width:100%;" @click.native.prevent="handleLogin">
+                    登录
+                </el-button>
+            </el-form-item>
+            <!--<div class="tips">-->
+            <!--<span style="margin-right:20px;">username: admin</span>-->
+            <!--<span> password: admin</span>-->
+            <!--</div>-->
+        </el-form>
+    </div>
 </template>
 
 <script>
 
-export default {
-  name: 'Login',
-  props: {
-    activePage: {
-      type: Boolean,
-      default: false
-    },
-    title: {
-      type: String,
-      default: '管理员登录'
-    }
-  },
-  data() {
-    return {
-      loginForm: {
-        username: 'admin',
-        password: 'admin'
-      },
-      loginRules: {
-        username: [{ required: true, trigger: 'blur' }],
-        password: [{ required: true, trigger: 'blur' }]
-      },
-      loading: false,
-      pwdType: 'password',
-      redirect: undefined,
+    import request from '@/utils/request'
 
-      websock: null,
-      reconnectData: null,
-      lockReconnect: false, // 避免重复连接，因为onerror之后会立即触发 onclose
-      timeout: 10000, // 10s一次心跳检测
-      timeoutObj: null,
-      serverTimeoutObj: null
-    }
-  },
-  watch: {
-    $route: {
-      handler: function(route) {
-        this.redirect = route.query && route.query.redirect
-      },
-      immediate: true
-    }
-  },
-  methods: {
-    showPwd() {
-      if (this.pwdType === 'password') {
-        this.pwdType = ''
-      } else {
-        this.pwdType = 'password'
-      }
-    },
-    handleLogin() {
-      this.$refs.loginForm.validate(valid => {
-        if (valid) {
-          this.loading = true
-          this.$store.dispatch('Login', this.loginForm).then(() => {
-            setTimeout(function() {
-              this.loading = false
-            }, 1000)
-            this.$message({
-              type: 'success',
-              message: '登录成功'
-            })
-
-            console.log('登录成功,' + (this.activePage ? '操作员' : '管理员')) // 里面的括号一定要加，不然+号的优先级比?要大
-            if (this.activePage) {
-              // 操作员进系统
-              // this.$router.push({ path: this.redirect || '/' })
-              this.$router.push({ path: '/' })
-            } else {
-              // 管理员进平台
-              // this.$router.push({ path: this.redirect || '/home' })
-              this.$router.push({ path: '/home' })
+    export default {
+        name: 'Login',
+        props: {
+            activePage: {
+                type: Boolean,
+                default: false
+            },
+            title: {
+                type: String,
+                default: '管理员登录'
             }
-          }).catch(() => {
-            this.loading = false
-          })
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
-    }
+        },
+        data() {
+            return {
+                loginForm: {
+                    username: 'admin',
+                    password: 'admin'
+                },
+                loginRules: {
+                    username: [{required: true, trigger: 'blur'}],
+                    password: [{required: true, trigger: 'blur'}]
+                },
+                loading: false,
+                pwdType: 'password',
+                redirect: undefined,
 
-  }
-}
+                websock: null,
+                reconnectData: null,
+                lockReconnect: false, // 避免重复连接，因为onerror之后会立即触发 onclose
+                timeout: 10000, // 10s一次心跳检测
+                timeoutObj: null,
+                serverTimeoutObj: null
+            }
+        },
+        watch: {
+            $route: {
+                handler: function (route) {
+                    this.redirect = route.query && route.query.redirect
+                },
+                immediate: true
+            }
+        },
+        methods: {
+            showPwd() {
+                if (this.pwdType === 'password') {
+                    this.pwdType = ''
+                } else {
+                    this.pwdType = 'password'
+                }
+            },
+            handleLogin() {
+                this.$refs.loginForm.validate(valid => {
+                    if (valid) {
+                        this.loading = true
+                        this.$store.dispatch('Login', this.loginForm).then(() => {
+                            setTimeout(function () {
+                                this.loading = false
+                            }, 1000)
+                            this.$message({
+                                type: 'success',
+                                message: '登录成功'
+                            })
+
+                            console.log('登录成功,' + (this.activePage ? '操作员' : '管理员')) // 里面的括号一定要加，不然+号的优先级比?要大
+                            if (this.activePage) {
+                                // 操作员进系统
+                                // this.$router.push({ path: this.redirect || '/' })
+                                this.$router.push({path: '/'})
+                            } else {
+                                // 管理员进平台
+                                // this.$router.push({ path: this.redirect || '/home' })
+                                this.$router.push({path: '/home'})
+                            }
+                        }).catch(() => {
+                            this.loading = false
+                        })
+                    } else {
+                        console.log('error submit!!')
+                        return false
+                    }
+                })
+            }
+
+        }
+    }
 </script>
 
 <style rel="stylesheet/scss" lang="scss">

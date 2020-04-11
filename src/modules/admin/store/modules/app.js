@@ -1,41 +1,65 @@
-import Cookies from 'js-cookie'
+import {
+  _setSessionStore,
+  _getSessionStore,
+  _setLocalStore,
+  _getLocalStore
+} from '@/common/js/storage'
 
 const app = {
+  namespaced: true,
   state: {
+    // 菜单状态
     sidebar: {
-      opened: !+Cookies.get('sidebarStatus'),
-      withoutAnimation: false
+      opened: _getSessionStore('sidebarStatus') ? !!+_getSessionStore('sidebarStatus') : true
     },
-    device: 'desktop'
+    language: _getLocalStore('language') || 'en',
+    size: _getLocalStore('size') || 'small',
+    theme: _getLocalStore('theme') || '#6959CD',
+    // 全屏状态
+    fullScreen: false
   },
   mutations: {
-    TOGGLE_SIDEBAR: state => {
-      if (state.sidebar.opened) {
-        Cookies.set('sidebarStatus', 1)
-      } else {
-        Cookies.set('sidebarStatus', 0)
-      }
+    // 切换侧边菜单显示状态
+    TOGGLE_SIDEBAR: (state, status) => {
       state.sidebar.opened = !state.sidebar.opened
-      state.sidebar.withoutAnimation = false
+      if (state.sidebar.opened) {
+        _setSessionStore('sidebarStatus', 1)
+      } else {
+        _setSessionStore('sidebarStatus', 0)
+      }
     },
-    CLOSE_SIDEBAR: (state, withoutAnimation) => {
-      Cookies.set('sidebarStatus', 1)
-      state.sidebar.opened = false
-      state.sidebar.withoutAnimation = withoutAnimation
+    TOGGLE_FULLSCREEN: (state) => {
+      state.fullScreen = !state.fullScreen
     },
-    TOGGLE_DEVICE: (state, device) => {
-      state.device = device
+    // 设置语言
+    SET_LANGUAGE: (state, language) => {
+      state.language = language
+      _setLocalStore('language', language)
+    },
+    // 设置尺寸
+    SET_SIZE: (state, size) => {
+      state.size = size
+      _setLocalStore('size', size)
+    },
+    // 设置主题
+    SET_THEME: (state, theme) => {
+      state.theme = theme
+      _setLocalStore('theme', theme)
     }
   },
   actions: {
-    ToggleSideBar: ({ commit }) => {
-      commit('TOGGLE_SIDEBAR')
+    // 切换侧边菜单
+    toggleSideBar ({ commit, state }, status) {
+      commit('TOGGLE_SIDEBAR', status)
     },
-    CloseSideBar({ commit }, { withoutAnimation }) {
-      commit('CLOSE_SIDEBAR', withoutAnimation)
+    setLanguage ({ commit }, lang) {
+      commit('SET_LANGUAGE', lang)
     },
-    ToggleDevice({ commit }, device) {
-      commit('TOGGLE_DEVICE', device)
+    setSize ({ commit }, size) {
+      commit('SET_SIZE', size)
+    },
+    settingTheme ({ commit }, theme) {
+      commit('SET_THEME', theme)
     }
   }
 }

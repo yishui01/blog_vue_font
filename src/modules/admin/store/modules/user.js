@@ -1,6 +1,7 @@
 import {getToken, setToken, removeToken} from '@/utils/auth'
 
 import request from '@/utils/request'
+import BACK_PREFIX from "../../../../api/admin/prefix";
 
 const user = {
     state: {
@@ -32,10 +33,10 @@ const user = {
             const username = userInfo.username.trim()
             return new Promise((resolve, reject) => {
                 request({
-                    url: '/admin/login',
+                    url: BACK_PREFIX+'/login',
                     method: 'post',
                     data: {
-                        name: username,
+                        username: username,
                         password: userInfo.password
                     }
                 }).then(response => {
@@ -53,7 +54,7 @@ const user = {
         GetInfo({commit}) {
             return new Promise((resolve, reject) => {
                 request({
-                    url: '/admin/info',
+                    url: BACK_PREFIX+'/admin/info',
                     method: 'get'
                 }).then(response => {
                     if (response.code === 0) {
