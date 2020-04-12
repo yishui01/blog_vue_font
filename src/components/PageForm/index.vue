@@ -22,6 +22,7 @@
       <el-input
         v-if="item.type === 'input' || item.type === 'password'"
         v-model="data[item.value]"
+        autocomplete="new-password"
         :type="item.type"
         :disabled="item.disabled"
         :placeholder="getPlaceholder(item)"
@@ -140,7 +141,9 @@ export default {
     // 得到placeholder的显示
     getPlaceholder (row) {
       let placeholder
-      if (row.type === 'input' || row.type === 'textarea') {
+      if (row.placeholder){
+        placeholder = row.placeholder
+      } else if (row.type === 'input' || row.type === 'textarea') {
         placeholder = '请输入' + row.label
       } else if (row.type === 'select' || row.type === 'time' || row.type === 'date') {
         placeholder = '请选择' + row.label

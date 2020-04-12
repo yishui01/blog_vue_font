@@ -83,6 +83,19 @@ export const constantRouterMap = [
             }
         ]
     },
+    {
+        path: '/article',
+        component: Layout,
+        meta: {title: '文章管理', icon: 'table'},
+        name: 'article',
+        children: [
+            {
+                path: 'article',
+                meta: {title: '文章管理', icon: 'table'},
+                component: () => import('../views/article/index')
+            }
+        ]
+    }
 ]
 
 // 平台首页固定权限

@@ -69,10 +69,9 @@
                 <!-- 自定义插槽-选择头像 -->
                 <template v-slot:form-avatar>
                     <div class="slot-avatar">
-                        <img
-                                v-imgAlart
+                        <img v-imgAlart
                                 :src="formInfo.data.avatar"
-                                style="height: 30px;"
+                                style="height: 40px;"
                         >
                         <el-button
                                 v-waves
@@ -115,8 +114,7 @@
                 v-if="selectFileInfo.visible"
                 v-model="formInfo.data.avatar"
                 :type="selectFileInfo.type"
-                :visible.sync="selectFileInfo.visible"
-        />
+                :visible.sync="selectFileInfo.visible"/>
     </div>
 </template>
 
@@ -159,9 +157,13 @@
             }
             // 验证密码
             const checkPwd = (rule, value, callback) => {
-                const check = this.$validate({label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15]})
-                if (!check.result) {
-                    callback(new Error(check.message))
+                if (this.formInfo.data.id == 0 || value.length > 0){ //创建或者修改时手动输入了的时候才会检查
+                    const check = this.$validate({label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15]})
+                    if (!check.result) {
+                        callback(new Error(check.message))
+                    } else {
+                        callback()
+                    }
                 } else {
                     callback()
                 }
@@ -238,7 +240,7 @@
                     },
                     list: [
                         {type: 'input', label: '账户', value: 'username'},
-                        {type: 'input', label: '用户名', value: 'nickname'},
+                        {type: 'input', label: '昵称', value: 'nickname'},
                         {type: 'select', label: '创建方式', value: 'cate', list: 'cate'},
                         {type: 'select', label: '状态', value: 'status', list: 'statusList'},
                         {type: 'select', label: '用户身份', value: 'is_super', list: 'isSuper'},
@@ -267,18 +269,19 @@
                     initCurpage: 1,
                     data: [],
                     fieldList: [
-                        {label: 'ID', value: 'id'},
+                        {label: 'ID', value: 'id',width:50},
                         // { label: 'sn', value: 'sn' },
                         {label: '账号', value: 'username'},
-                        {label: '用户名', value: 'nickname'},
-                        {label: '头像', value: 'avatar'},
-                        {label: '所属角色', value: 'is_super', minWidth: 120, list: 'isSuper'},
-                        {label: '简介', value: 'desc', width: 80},
+                        {label: '昵称', value: 'nickname'},
+                        {label: '头像', value: 'avatar',type:"image"},
+                        {label: '所属角色', value: 'is_super', minWidth: 80, list: 'isSuper'},
+                        {label: '简介', value: 'desc'},
+                        {label: '手机号', value: 'phone'},
                         {label: '邮箱', value: 'email', width: 100},
                         {label: '状态', value: 'status', width: 90, type: 'slot', list: 'statusList'},
                         {label: '创建方式', value: 'cate', list: 'cate'},
-                        {label: '创建时间', value: 'create_time', minWidth: 180},
-                        {label: '更新时间', value: 'update_time', minWidth: 180}
+                       // {label: '创建时间', value: 'create_time', minWidth: 130},
+                        {label: '更新时间', value: 'update_time', minWidth: 130}
                     ],
                     handle: {
                         fixed: 'right',
@@ -326,7 +329,7 @@
                     },
                     fieldList: [
                         {label: '账号', value: 'username', type: 'input', required: true, validator: checkAccount},
-                        {label: '密码', value: 'password', type: 'password', required: true, validator: checkPwd},
+                        {label: '密码', value: 'password', type: 'password', validator: checkPwd},
                         {label: '昵称', value: 'nickname', type: 'input', required: true},
                         {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
                         {label: '手机号码', value: 'phone', type: 'input', validator: checkPhone},
@@ -399,15 +402,18 @@
                 switch (val) {
                     case 'create':
                         for (const item of formInfo.fieldList) {
-                            if (item.value === 'account') {
+                            if (item.value === 'username') {
                                 item.type = 'input'
                             }
                         }
                         break
                     case 'update':
                         for (const item of formInfo.fieldList) {
-                            if (item.value === 'account') {
+                            if (item.value === 'username') {
                                 item.type = 'tag'
+                            }
+                            if (item.value === 'password') {
+                                item.placeholder = '不填则保持原有密码'
                             }
                         }
                         break
@@ -415,44 +421,15 @@
             }
         },
         mounted() {
-            // this.initList() //这个主要是加载筛选列表用的，代码原来是写的 getAllApi 获取全部用户信息 并映射成map保存到userList
-            // this.initDataPerms()
             this.initRules()
             this.getList()
         },
         methods: {
-            // 初始化数据权限
-            initDataPerms() {
-                const btList = this.tableInfo.handle.btList
-                const btList1 = this.filterInfo.list
-                this.$initDataPerms('userMan', btList)
-                this.$initDataPerms('userMan', btList1)
-            },
             // 初始化验证
             initRules() {
                 const formInfo = this.formInfo
                 formInfo.rules = this.$initRules(formInfo.fieldList)
             },
-            // initList() {
-            //     const listTypeInfo = this.listTypeInfo
-            //     getListApi().then(res => {
-            //         //if (res.code == 0) {
-            //         listTypeInfo.userList = res.content.map(item => {
-            //             return {
-            //                 key: item.name,
-            //                 value: item.id
-            //             }
-            //         })
-            //         } else {
-            //           this.$message({
-            //             showClose: true,
-            //             message: res.message,
-            //             type: res.success ? 'success' : 'error',
-            //             duration: 3500
-            //           })
-            //         }
-            //     })
-            // },
             // 获取列表
             getList() {
                 this.tableInfo.refresh = Math.random()
@@ -580,19 +557,15 @@
             // 初始化表单
             resetForm() {
                 this.formInfo.data = {
-                    id: '', // *唯一ID
-                    account: '', // *用户账号
+                    id: 0, // *唯一ID
+                    username: '', // *用户账号
                     password: '', // *用户密码
-                    name: '', // *用户昵称
-                    type: 2, // *用户类型: 0: 手机注册 1: 论坛注册 2: 管理平台添加
-                    sex: 0, // *性别: 0:男 1:女
+                    nickname: '', // *用户昵称
                     avatar: '', // 头像
                     phone: '', // 手机号码
-                    wechat: '', // 微信
-                    qq: '', // qq
                     email: '', // 邮箱
                     desc: '', // 描述
-                    status: 1 // *状态: 0：停用，1：启用(默认为1)',
+                    status: 0 // *状态: 0：启用，1：停用(默认为0)',
                     // create_user: '', // 创建人
                     // create_time: '', // 创建时间
                     // update_user: '', // 修改人

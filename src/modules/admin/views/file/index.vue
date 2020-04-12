@@ -20,11 +20,7 @@
                 :list-type-info="listTypeInfo"
                 :handle="tableInfo.handle"
                 @handleClick="handleClick"
-                @handleEvent="handleEvent">
-            <template v-slot:col-url="scope">
-                <img :src="scope.row.url" style="width: 90px;height: 80px;">
-            </template>
-        </page-table>
+                @handleEvent="handleEvent" />
 
         <!-- 弹窗 -->
         <page-dialog
@@ -95,7 +91,7 @@
                     },
                     list: [
                         {type: 'input', label: '文件名', value: 'name'},
-                        {type: 'input', label: 'tag', value: 'tag'},
+                        {type: 'input', label: '标签', value: 'tag'},
                         {
                             type: 'button',
                             label: '搜索',
@@ -120,7 +116,7 @@
                     initCurpage: 1,
                     data: [],
                     fieldList: [
-                        {label: '预览', value: 'url', type: 'slot',width:"110px"},
+                        {label: '预览', value: 'url', type: 'image',width:"150px"},
                         {label: '上传日期', value: 'create_time',width:"180px"},
                         {label: '文件名', value: 'name'},
                         {label: '外链', value: 'url',width:"550px"},

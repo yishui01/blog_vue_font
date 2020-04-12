@@ -8,6 +8,9 @@
     position: relative;
   }
 
+  .is-active{
+    background-color:#F5F8FB !important;
+  }
   // 侧边栏 Sidebar container
   .sidebar-container {
     transition: width 0.28s;
@@ -66,6 +69,14 @@
       }
     }
 
+    ul{
+      .el-menu-item{
+        background-color: #000408;
+        height: 44px;
+        line-height: 44px;
+      }
+    }
+
     .is-active>.el-submenu__title {
       color: $subMenuActiveText !important;
     }
@@ -79,6 +90,12 @@
         background-color: $subMenuHover !important;
       }
     }
+
+    & .el-submenu .is-active {
+      background-color: $subMenuHover !important;
+    }
+
+
   }
 
   .hideSidebar {

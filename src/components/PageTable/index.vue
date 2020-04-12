@@ -282,11 +282,9 @@ export default {
         api(params).then(res => {
           this.listInfo.loading = false
           if (res.code == 0) {
-            console.log("bbbbbbb")
             // 使外面可以访问到表格数据
             const arr = Array.isArray(res.Lists) ? res.Lists : res.data.Lists
             this.$emit('update:data', arr)
-            console.log("aaaaaa")
             if (this.pager) {
               // this.listInfo.total = res.content.totals
               // this.listInfo.query.pageNum = res.content.pageNum - 0
