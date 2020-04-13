@@ -4,7 +4,7 @@ import BACK_PREFIX from "./prefix";
 //创建
 export function createApi(data) {
     return request({
-        url: BACK_PREFIX + "/user/create",
+        url: BACK_PREFIX + "/tag/create",
         method: "post",
         data
     })
@@ -13,7 +13,7 @@ export function createApi(data) {
 //更新
 export function updateApi(data) {
     return request({
-        url: BACK_PREFIX + "/user/update",
+        url: BACK_PREFIX + "/tag/update",
         method: "post",
         data
     })
@@ -22,7 +22,7 @@ export function updateApi(data) {
 //删除
 export function deleteApi(id) {
     return request({
-        url: BACK_PREFIX + `/user/delete`,
+        url: BACK_PREFIX + `/tag/delete`,
         method: "post",
         data: "id=" + id //这是传formData
     })
@@ -31,7 +31,7 @@ export function deleteApi(id) {
 //获取列表
 export function getListApi(param) {
     return request({
-        url: BACK_PREFIX + "/user/list",
+        url: BACK_PREFIX + "/tag/list",
         method: "get",
         params: param
     })

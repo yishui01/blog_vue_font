@@ -36,36 +36,18 @@ export const constantRouterMap = [
                 path: 'dashboard',
                 meta: {title: '首页', icon: 'table'},
                 component: () => import('../views/dashboard/index')
-            },
-            {
-                path: 'dashboardss',
-                meta: {title: '首页2', icon: 'table'},
-                component: () => import('../views/dashboard/index')
-            }
-        ]
-    },
-    {
-        path: '/form',
-        component: Layout,
-        meta: {title: '表单', icon: 'table'},
-        name: 'form',
-        children: [
-            {
-                path: 'dashboard',
-                meta: {title: '表单', icon: 'table'},
-                component: () => import('../views/form/index')
             }
         ]
     },
     {
         path: '/user',
         component: Layout,
-        meta: {title: '用户管理', icon: 'table'},
+        meta: {title: '用户管理', icon: 'user'},
         name: 'User',
         children: [
             {
                 path: 'user',
-                meta: {title: '用户管理', icon: 'table'},
+                meta: {title: '用户管理', icon: 'user'},
                 component: () => import('../views/user/index')
             }
         ]
@@ -93,6 +75,32 @@ export const constantRouterMap = [
                 path: 'article',
                 meta: {title: '文章管理', icon: 'table'},
                 component: () => import('../views/article/index')
+            }
+        ]
+    },
+    {
+        path: '/tag',
+        component: Layout,
+        meta: {title: '标签管理', icon: 'table'},
+        name: 'tag',
+        children: [
+            {
+                path: 'tag',
+                meta: {title: '标签管理', icon: 'table'},
+                component: () => import('../views/tag/index')
+            }
+        ]
+    },
+    {
+        path: '/webinfo',
+        component: Layout,
+        meta: {title: '信息管理', icon: 'table'},
+        name: 'webinfo',
+        children: [
+            {
+                path: 'webinfo',
+                meta: {title: '信息管理', icon: 'table'},
+                component: () => import('../views/webinfo/index')
             }
         ]
     }

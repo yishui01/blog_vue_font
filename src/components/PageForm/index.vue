@@ -52,9 +52,11 @@
         v-if="item.type === 'select'"
         v-model="data[item.value]"
         :disabled="item.disabled"
-        :clearable="item.clearable"
-        :filterable="item.filterable"
+        :clearable="item.clearable === false ? item.clearable : true"
+        :filterable="item.filterable === false ? item.filterable : true"
         :placeholder="getPlaceholder(item)"
+        :multiple="item.multiple"
+        :allow-create="item.allowCreate"
         @change="handleEvent(item.event, data[item.value])"
       >
         <el-option

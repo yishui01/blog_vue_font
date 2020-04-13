@@ -34,12 +34,15 @@ import prototype from '@/common/js/prototype' // 挂载在原型上的方法
 import vueWaves from '@/directive/waves/index'// 水波纹指令
 import vueFocus from '@/directive/focus/index'// 聚焦指令
 import vueImgAlart from '@/directive/imgAlart/index'// 图片弹窗指令
-
+import mavonEditor from 'mavon-editor'
+import 'mavon-editor/dist/css/index.css'
+Vue.use(mavonEditor)
 Vue.use(vueWaves)
 Vue.use(vueFocus)
 Vue.use(vueImgAlart)
 Vue.use(prototype)
 Vue.use(ElementUI)
+
 Vue.config.productionTip = false
 Vue.prototype.$store = store
 Vue.prototype.$request = request

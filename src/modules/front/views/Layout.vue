@@ -34,6 +34,9 @@
     }
 </script>
 <style scoped>
+    *{
+        //text-shadow: 0 1px #eee, 0 0 1px rgba(0,0,0,.2);
+    }
     .allDiv {
         min-height: 1000px;
     }

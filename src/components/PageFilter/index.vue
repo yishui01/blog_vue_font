@@ -30,6 +30,7 @@
         :disabled="item.disabled"
         :clearable="item.clearable === false ? item.clearable : true"
         :filterable="item.filterable === false ? item.filterable : true"
+        :allow-create="item.allowCreate"
         :placeholder="getPlaceholder(item)"
         @change="handleEvent(item.event)"
       >

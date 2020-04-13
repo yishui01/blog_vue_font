@@ -283,15 +283,25 @@ export default {
           this.listInfo.loading = false
           if (res.code == 0) {
             // 使外面可以访问到表格数据
-            const arr = Array.isArray(res.Lists) ? res.Lists : res.data.Lists
+            var total = res.data.Total
+            var pageNum = res.data.PageNum
+            var pageSize = res.data.PageSize
+            var lists = res.data.Lists
+            if (total == undefined){ //有些rpc接口的分页返回的是小写字段，所以这里适配
+               total = res.data.total
+               pageNum = res.data.page
+               pageSize = res.data.size
+               lists = res.data.lists
+            }
+            const arr =lists
             this.$emit('update:data', arr)
             if (this.pager) {
               // this.listInfo.total = res.content.totals
               // this.listInfo.query.pageNum = res.content.pageNum - 0
               // this.listInfo.query.pageSize = res.content.pageSize - 0
-              this.listInfo.total = res.data.Total
-              this.listInfo.query.pageNum = res.data.PageNum - 0
-              this.listInfo.query.pageSize = res.data.PageSize - 0
+              this.listInfo.total = total
+              this.listInfo.query.pageNum = pageNum - 0
+              this.listInfo.query.pageSize = pageSize - 0
             }
             // 设置当前选中项
             this.checkedList.forEach(selected => {
@@ -356,7 +366,8 @@ export default {
       // 表格的高度 = 视口高度 - 表格到头部导航的距离 - 头部导航的高度137 - 分页组件的高度100 - 分页组件
       document.getElementsByClassName('el-table')[0].style.height = (boxH - tabOffT - navH - tagH - searchH - bottomH) + 'px'
       // console.log('表格最大高度为:' + (boxH - navH - tagH - searchH - bottomH))
-      return (boxH - navH - tagH - searchH - bottomH - 50)
+      var off = 50 + !this.pager*1*120 //适配高度差以及分页部分
+      return (boxH - navH - tagH - searchH - bottomH - off)
     }
   }
 }

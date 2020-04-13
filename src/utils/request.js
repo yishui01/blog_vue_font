@@ -67,6 +67,12 @@ service.interceptors.response.use(
                 type: 'error',
                 duration: 5 * 1000
             })
+        } else if (res.status === 503) {
+            Message({
+                message: '服务暂时不可用，请稍后再试',
+                type: 'error',
+                duration: 5 * 1000
+            })
         } else {
             Message({
                 message: '网络错误，请稍后再试',

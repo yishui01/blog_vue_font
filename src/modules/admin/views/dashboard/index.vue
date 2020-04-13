@@ -1,6 +1,6 @@
 <template>
   <div>
-   dashboard
+   dashboard...展示内容待定
   </div>
 </template>
 

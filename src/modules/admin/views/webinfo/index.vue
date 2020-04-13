@@ -125,7 +125,7 @@
         createApi,
         updateApi,
         deleteApi
-    } from '@/api/admin/user'
+    } from '@/api/admin/webinfo'
     import PageFilter from '@/components/PageFilter'
     import PageTable from '@/components/PageTable'
     import PageDialog from '@/components/PageDialog'
@@ -141,68 +141,6 @@
             SelectFile
         },
         data() {
-            // 检测用户账号
-            const checkAccount = (rule, value, callback) => {
-                const check = this.$validate({
-                    label: '账号',
-                    value,
-                    rules: ['notnull', 'noChinese', 'max'],
-                    conditions: [12]
-                })
-                if (!check.result) {
-                    callback(new Error(check.message))
-                } else {
-                    callback()
-                }
-            }
-            // 验证密码
-            const checkPwd = (rule, value, callback) => {
-                if (this.formInfo.data.id == 0 || value.length > 0){ //创建或者修改时手动输入了的时候才会检查
-                    const check = this.$validate({label: '密码', value, rules: ['notnull', 'length'], conditions: [6, 15]})
-                    if (!check.result) {
-                        callback(new Error(check.message))
-                    } else {
-                        callback()
-                    }
-                } else {
-                    callback()
-                }
-            }
-            // 检测号码
-            const checkPhone = (rule, value, callback) => {
-                const check = this.$validate({label: '手机号码', value, rules: ['phone']})
-                if (!check.result) {
-                    callback(new Error(check.message))
-                } else {
-                    callback()
-                }
-            }
-            // 检测非中文
-            const checkWechat = (rule, value, callback) => {
-                const check = this.$validate({label: '微信', value, rules: ['noChinese', 'max'], conditions: [12]})
-                if (!check.result) {
-                    callback(new Error(check.message))
-                } else {
-                    callback()
-                }
-            }
-            const checkQQ = (rule, value, callback) => {
-                const check = this.$validate({label: 'QQ', value, rules: ['noChinese', 'max'], conditions: [12]})
-                if (!check.result) {
-                    callback(new Error(check.message))
-                } else {
-                    callback()
-                }
-            }
-            // 检测邮箱
-            const checkEmail = (rule, value, callback) => {
-                const check = this.$validate({label: '邮箱', value, rules: ['email', 'max'], conditions: [24]})
-                if (!check.result) {
-                    callback(new Error(check.message))
-                } else {
-                    callback()
-                }
-            }
             return {
                 getListApi,
                 createApi,
@@ -210,20 +148,10 @@
                 deleteApi,
                 // 相关列表
                 listTypeInfo: {
-                    cate: [
-                        {key: '后台添加', value: "BACK"},
-                        {key: '第三方登录', value: "OPEN"},
-                        {key: '邮箱注册', value: "EMAIL"},
-                        {key: '手机注册', value: "PHONE"},
-                    ],
-                    isSuper: [
-                        {key: '普通用户', value: 0},
-                        {key: '管理员', value: 1},
-                    ],
-                    oauthType: [
-                        {key: 'QQ', value: 'qq'},
-                        {key: '微博', value: 'weibo'},
-                        {key: 'github', value: 'github'},
+                    webkey: [
+                        {key: '音乐(music)', value: "music"},
+                        {key: '友链(friend)', value: "friend"},
+                        {key: '背景图(backImg)', value: "backImg"},
                     ],
                     statusList: [
                         {key: '启用', value: 0},
@@ -234,17 +162,16 @@
                 // 过滤相关配置
                 filterInfo: {
                     query: {
-                        create_user: '',
-                        account: '',
-                        name: ''
+                        web_key: '',
+                        unique_val: '',
+                        web_val: '',
+                        status: ''
                     },
                     list: [
-                        {type: 'input', label: '账户', value: 'username'},
-                        {type: 'input', label: '昵称', value: 'nickname'},
-                        {type: 'select', label: '创建方式', value: 'cate', list: 'cate'},
+                        {type: 'select', label: 'key名', value: 'web_key', list: 'webkey',allowCreate:true},
+                        {type: 'input', label: '唯一值', value: 'unique_val'},
+                        {type: 'input', label: '配置值', value: 'web_val'},
                         {type: 'select', label: '状态', value: 'status', list: 'statusList'},
-                        {type: 'select', label: '用户身份', value: 'is_super', list: 'isSuper'},
-                        {type: 'select', label: '第三方登录方式', value: 'open_cate', list: 'oauthType'},
                         {
                             type: 'button',
                             label: '搜索',
@@ -271,17 +198,13 @@
                     fieldList: [
                         {label: 'ID', value: 'id',width:50},
                         // { label: 'sn', value: 'sn' },
-                        {label: '账号', value: 'username'},
-                        {label: '昵称', value: 'nickname'},
-                        {label: '头像', value: 'avatar',type:"image"},
-                        {label: '所属角色', value: 'is_super', minWidth: 80, list: 'isSuper'},
-                        {label: '简介', value: 'desc'},
-                        {label: '手机号', value: 'phone'},
-                        {label: '邮箱', value: 'email', width: 100},
+                        {label: '配置名', value: 'web_key',list:'webkey'},
+                        {label: '唯一值', value: 'unique_val'},
+                        {label: '配置值', value: 'web_val'},
                         {label: '状态', value: 'status', width: 90, type: 'slot', list: 'statusList'},
-                        {label: '创建方式', value: 'cate', list: 'cate'},
-                       // {label: '创建时间', value: 'create_time', minWidth: 130},
-                        {label: '更新时间', value: 'updated_at', minWidth: 130}
+                        {label: '排序', value: 'ord'},
+                        //{label: '创建时间', value: 'created_at', width: 130},
+                        {label: '更新时间', value: 'updated_at',width: 170}
                     ],
                     handle: {
                         fixed: 'right',
@@ -314,13 +237,10 @@
                     ref: null,
                     data: {
                         id: 0, // *唯一ID
-                        username: '', // *用户账号
-                        password: '', // *用户密码
-                        nickname: '', // *用户昵称
-                        avatar: '', // 头像
-                        phone: '', // 手机号码
-                        email: '', // 邮箱
-                        desc: '', // 描述
+                        web_key: '', //
+                        web_val: '', //
+                        unique_val: '', // 唯一值
+                        ord:  "0", // 排序
                         status: 0 // *状态: 0：启用，1：停用(默认为0)',
                         // create_user: '', // 创建人
                         // create_time: '', // 创建时间
@@ -328,13 +248,11 @@
                         // update_time: '' // 修改时间
                     },
                     fieldList: [
-                        {label: '账号', value: 'username', type: 'input', required: true, validator: checkAccount},
-                        {label: '密码', value: 'password', type: 'password', validator: checkPwd},
-                        {label: '昵称', value: 'nickname', type: 'input', required: true},
-                        {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
-                        {label: '手机号码', value: 'phone', type: 'input', validator: checkPhone},
-                        {label: '邮箱', value: 'email', type: 'input', validator: checkEmail},
-                        {label: '描述', value: 'desc', type: 'textarea', className: 'el-form-block'},
+                        {label: '配置名', value: 'web_key', type: 'select',list:"webkey", required: true,filterable:true,allowCreate:true,placeholder:"可选择也可手动输入"},
+                        {label: '配置值', value: 'web_val', type: 'input', required: true},
+                        {label: '唯一值', value: 'unique_val', type: 'input', placeholder:"用于判断该key下的值是否重复"},
+                        {label: '排序', value: 'ord', type: 'input', required: true},
+                       // {label: '头像', value: 'avatar', type: 'slot', className: 'el-form-block'},
                         {label: '状态', value: 'status', type: 'select', list: 'statusList', required: true}
                     ],
                     rules: {},
@@ -522,6 +440,9 @@
                                 } else {
                                     return
                                 }
+                                if (params.unique_val == "") {
+                                    params.unique_val = params.web_val
+                                }
                                 dialogInfo.btLoading = true
                                 this.$handleAPI(type, api, params).then(res => {
                                     dialogInfo.visible = false
@@ -548,8 +469,8 @@
                         data.forEach(item => {
                             this.$set(item, 'statusLoading', false) //用this.$set 给每个对象动态加个属性，这个属性会双向绑定，如果直接加则没有绑定效果
                             this.$set(item, 'deleteLoading', false)
-                            item.created_at = this.$fn.switchTime(item.created_at, 'YYYY-MM-DD hh:mm:ss')
-                            item.updated_at = this.$fn.switchTime(item.updated_at, 'YYYY-MM-DD hh:mm:ss')
+                            item.created_at = this.$fn.switchTime(item.created_at*1000, 'YYYY-MM-DD hh:mm:ss')
+                            item.updated_at = this.$fn.switchTime(item.updated_at*1000, 'YYYY-MM-DD hh:mm:ss')
                         })
                         break
                 }
@@ -558,13 +479,10 @@
             resetForm() {
                 this.formInfo.data = {
                     id: 0, // *唯一ID
-                    username: '', // *用户账号
-                    password: '', // *用户密码
-                    nickname: '', // *用户昵称
-                    avatar: '', // 头像
-                    phone: '', // 手机号码
-                    email: '', // 邮箱
-                    desc: '', // 描述
+                    web_key: '', //
+                    web_val: '', //
+                    unique_val: '', // 唯一值
+                    ord:  "0", // 排序
                     status: 0 // *状态: 0：启用，1：停用(默认为0)',
                     // create_user: '', // 创建人
                     // create_time: '', // 创建时间
