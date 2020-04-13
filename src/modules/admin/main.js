@@ -15,7 +15,7 @@ import '@/icons' // icon
 import './permission' // permission control
 
 
-import request from '../../utils/request'
+import request from './request'
 
 // import jquery from 'jquery'
 // window.jquery = window.$ = jquery

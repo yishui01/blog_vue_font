@@ -1,7 +1,8 @@
 import axios from 'axios'
-import {getCsrfToken} from "./auth";
-import {Message, MessageBox} from "element-ui";
-import store from "../store";
+import {delUSERCookie, getCsrfToken} from "../../utils/auth";
+import {Message} from "element-ui";
+import store from "./store";
+import router from "./router";
 
 // 创建axios实例
 const service = axios.create({
@@ -35,20 +36,9 @@ service.interceptors.response.use(
         const res = error.response
         console.log(res)
         if (res.status === 401) {
-            MessageBox.confirm(
-                '你已被登出，可以取消继续留在该页面，或者重新登录',
-                '确定登出',
-                {
-                    confirmButtonText: '重新登录',
-                    cancelButtonText: '取消',
-                    type: 'warning'
-                }
-            ).then(() => {
-                store.dispatch('FedLogOut').then(() => {
-                    this.$router.push("/login")
-                    location.reload() // 为了重新实例化vue-router对象 避免bug
-                })
-            })
+            store.commit("SER_USER",null)
+            delUSERCookie()
+            router.push("/login")
         } else if (res.status === 400) { //表单验证失败
             var times = 5 * 1000
             Message({

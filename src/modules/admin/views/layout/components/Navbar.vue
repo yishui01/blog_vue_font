@@ -25,7 +25,7 @@ export default {
       'avatar'
     ]),
     username() {
-      return "+666"
+      return this.userInfo.user ? this.userInfo.user.nickname : ''
     }
   },
   methods: {

@@ -147,9 +147,7 @@ export default {
         .then(() => {
           this.$store.dispatch('FedLogOut').then(() => {
             this.$router.push("/login")
-            setTimeout(()=>{
-              location.reload() // 为了重新实例化vue-router对象 避免bug
-            },200)
+            location.reload()
           })
         })
         .catch(() => {
@@ -171,7 +169,7 @@ export default {
         if (valid) {
           this.passwordLoading = true
           const data = Object.assign({}, this.passwordFormData)
-          data.sn = userInfo
+          data.sn = this.userInfo.user.sn
           updatePass(data).then(res => {
               this.$message({
                 message: '修改成功',

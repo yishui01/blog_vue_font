@@ -1,4 +1,4 @@
-import request from '../../utils/request'
+import request from '../../modules/admin/request'
 import BACK_PREFIX from "./prefix";
 
 //删除

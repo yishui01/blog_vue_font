@@ -6,9 +6,14 @@ const CSRFKey = '_csrf'
 
 export function getUserCookie() {
   var user= Cookies.get(UserKey)
-  console.log("获取到cookie了",user)
+  //console.log("获取到cookie了",user)
   return user
 }
+export function delUSERCookie() {
+  Cookies.remove(CSRFKey)
+  Cookies.remove(UserKey)
+}
+
 export function getCsrfToken() {
   return Cookies.get(CSRFKey)
 }

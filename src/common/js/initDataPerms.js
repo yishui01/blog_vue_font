@@ -1,4 +1,4 @@
-import store from '@/store'
+import store from '../../modules/admin/store'
 
 export default (code, list) => {
   for (const item of list) {
