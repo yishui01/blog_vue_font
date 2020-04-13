@@ -45,6 +45,7 @@ service.interceptors.response.use(
                 }
             ).then(() => {
                 store.dispatch('FedLogOut').then(() => {
+                    this.$router.push("/login")
                     location.reload() // 为了重新实例化vue-router对象 避免bug
                 })
             })

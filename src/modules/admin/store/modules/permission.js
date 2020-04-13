@@ -1,4 +1,4 @@
-import { asyncRouterMap, homeConstantMap, homeSuperMap, constantRouterMap } from '../../router'
+import { asyncRouterMap, homeConstantMap, constantRouterMap } from '../../router'
 
 /**
  * 遍历当前的权限数组，看传进来的route的tag在permission中有没有权限
@@ -50,12 +50,7 @@ const permission = {
     SET_ROUTERS: (state, routers) => {
       state.addRouters = routers
       state.routers = constantRouterMap.concat(routers)
-      console.log('设置了权限')
     },
-    // 设置平台路由
-    SET_HOME_ROUTERS: (state, routers) => {
-      state.homeRouters = routers
-    }
   },
   actions: {
     // 登录成功后跳转到首页-》跳转之前拉取userinfo，然后userinfo传到这里，进行加载路由
@@ -64,7 +59,6 @@ const permission = {
         let homeMap, routesMap
         homeMap = homeConstantMap
         routesMap = filterAsyncRouter(asyncRouterMap, data.user.permission)
-        commit('SET_HOME_ROUTERS', homeMap)
         commit('SET_ROUTERS', routesMap)
         resolve()
       })

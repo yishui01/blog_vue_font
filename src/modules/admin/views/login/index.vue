@@ -48,7 +48,6 @@
 </template>
 
 <script>
-
     import request from '@/utils/request'
 
     export default {
@@ -113,17 +112,7 @@
                                 type: 'success',
                                 message: '登录成功'
                             })
-
-                            console.log('登录成功,' + (this.activePage ? '操作员' : '管理员')) // 里面的括号一定要加，不然+号的优先级比?要大
-                            if (this.activePage) {
-                                // 操作员进系统
-                                // this.$router.push({ path: this.redirect || '/' })
-                                this.$router.push({path: '/'})
-                            } else {
-                                // 管理员进平台
-                                // this.$router.push({ path: this.redirect || '/home' })
-                                this.$router.push({path: '/home'})
-                            }
+                            this.$router.push({path: '/user/user'})
                         }).catch(() => {
                             this.loading = false
                         })

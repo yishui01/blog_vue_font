@@ -1,6 +1,14 @@
 import request from '../../utils/request'
 import BACK_PREFIX from "./prefix";
 
+export function updatePass(data) {
+    return request({
+        url: BACK_PREFIX + "/update/pass",
+        method: "post",
+        data
+    })
+}
+
 //创建
 export function createApi(data) {
     return request({

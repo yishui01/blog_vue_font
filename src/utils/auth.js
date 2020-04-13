@@ -1,8 +1,14 @@
 import Cookies from 'js-cookie'
 
+const UserKey = 'user_val'
 const TokenKey = 'vue_admin_template_token'
 const CSRFKey = '_csrf'
 
+export function getUserCookie() {
+  var user= Cookies.get(UserKey)
+  console.log("获取到cookie了",user)
+  return user
+}
 export function getCsrfToken() {
   return Cookies.get(CSRFKey)
 }
@@ -21,5 +27,6 @@ export function removeToken() {
   // return Cookies.remove(TokenKey)
   return localStorage.removeItem(TokenKey)
 }
+
 
 

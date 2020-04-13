@@ -1,16 +1,6 @@
 import request from '../../utils/request'
 import BACK_PREFIX from "./prefix";
 
-//创建
-export function createApi(data) {
-    return request({
-        headers: { "Content-Type": "multipart/form-data" },
-        url: "/upload",
-        method: "post",
-        data
-    })
-}
-
 //删除
 export function deleteApi(id) {
     return request({

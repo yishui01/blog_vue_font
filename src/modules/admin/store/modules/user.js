@@ -1,4 +1,4 @@
-import {getToken, setToken, removeToken} from '@/utils/auth'
+import {getToken, getUserCookie} from '@/utils/auth'
 
 import request from '@/utils/request'
 import BACK_PREFIX from "../../../../api/admin/prefix";
@@ -33,16 +33,14 @@ const user = {
             const username = userInfo.username.trim()
             return new Promise((resolve, reject) => {
                 request({
-                    url: BACK_PREFIX+'/login',
+                    url: BACK_PREFIX + '/login',
                     method: 'post',
                     data: {
                         username: username,
                         password: userInfo.password
                     }
                 }).then(response => {
-                    const token = response.data
-                    setToken(token)
-                    commit('SET_TOKEN', token)
+                    commit('SER_USER', getUserCookie())
                     resolve()
                 }).catch(error => {
                     reject(error)
@@ -54,14 +52,10 @@ const user = {
         GetInfo({commit}) {
             return new Promise((resolve, reject) => {
                 request({
-                    url: BACK_PREFIX+'/admin/info',
+                    url: '/api/user_info',
                     method: 'get'
                 }).then(response => {
-                    if (response.code === 0) {
-                        commit('SER_USER', response.data)
-                    } else {
-                        reject('获取用户信息失败!')
-                    }
+                    commit('SER_USER', getUserCookie())
                     resolve(response)
                 }).catch(error => {
                     reject(error)
@@ -69,12 +63,18 @@ const user = {
             })
         },
 
-        // 前端 登出
+        // 登出
         FedLogOut({commit}) {
-            return new Promise(resolve => {
-                commit('SET_TOKEN', '')
-                removeToken()
-                resolve()
+            return new Promise((resolve, reject) => {
+                request({
+                    url: '/api/logout',
+                    method: 'post'
+                }).then(response => {
+                    commit('SER_USER', null)
+                    resolve(response)
+                }).catch(error => {
+                    reject(error)
+                })
             })
         }
     }
