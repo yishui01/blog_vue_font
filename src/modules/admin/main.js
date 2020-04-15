@@ -36,6 +36,8 @@ import vueFocus from '@/directive/focus/index'// 聚焦指令
 import vueImgAlart from '@/directive/imgAlart/index'// 图片弹窗指令
 import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
+
+
 Vue.use(mavonEditor)
 Vue.use(vueWaves)
 Vue.use(vueFocus)

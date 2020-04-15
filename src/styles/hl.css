@@ -1,0 +1,13 @@
+.hljs {
+    display: block;
+    padding: 1em;
+    background: #282c34;
+    border-radius: 5px;
+    font-size: 15px;
+    font-family: mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
+
+    overflow: auto;
+    white-space: pre;
+    word-break: initial;
+    word-wrap: normal;
+}

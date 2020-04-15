@@ -2,7 +2,7 @@ import axios from 'axios'
 import {delUSERCookie, getCsrfToken} from "../../utils/auth";
 import {Message} from "element-ui";
 import store from "./store";
-import router from "./router";
+import router from "./router/router";
 
 // 创建axios实例
 const service = axios.create({

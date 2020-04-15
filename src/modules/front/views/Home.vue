@@ -1,90 +1,91 @@
 <template>
     <div>
         <div class="content">
-            <div class="article" @click="$to('art')">
-                <div class="imgDiv">
-                    <img class="title_img"
-                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
+            <div class="article slide" v-for="(item) in artList" @click="$to('art',{sn:item.sn})">
+                <div class="imgDiv forceShow" >
+                    <img class="title_img" :src="item.img">
                 </div>
                 <div class="introDiv">
                     <div class="create_time">
-                        <i class="el-icon-date tagIcon"></i>发布于 2019-01-21
+                        <i class="el-icon-date tagIcon"></i>发布于 {{item.created_at}}
                     </div>
-                    <h1>Win32常见的数据类型</h1>
+                    <h1>{{item.title}}</h1>
                     <div class="tag-box">
-                        <span><i class="el-icon-price-tag tagIcon" style="vertical-align: middle;"></i></span>
-                        <span class="tagSpan">
-                           C++
+                        <span v-if="item.tags.length > 0"><i class="el-icon-price-tag tagIcon"
+                                                             style="vertical-align: middle;"></i></span>
+                        <span class="tagSpan" v-for="(t) in item.tags" v-if="t!=''">
+                           {{t}}
                         </span>
                     </div>
                     <div class="clickAndComm">
-                        <span><i class="el-icon-star-off tagIcon"></i>7热度</span>
-                        <span><i class="el-icon-s-comment tagIcon"></i>0条评论</span>
+                        <span><i class="el-icon-star-off tagIcon"></i> {{item.view_count}}热度</span>
+                        <span><i class="el-icon-s-comment tagIcon"></i>{{item.cm_count}} 条评论</span>
                     </div>
                 </div>
                 <div class="classifybox">
                     <div class="classify">工具</div>
                 </div>
             </div>
-
-            <div class="article">
-                <div class="imgDiv">
-                    <img class="title_img"
-                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
-                </div>
-                <div class="introDiv">
-                    ad
-                </div>
-                <div class="classifybox">
-                    <div class="classify">工具</div>
-                </div>
+            <div class="paginate" v-show="artList.length > 0">
+                <page :total="total" :pageSize="query.page_size" @pageClick="handlePage"/>
             </div>
-            <div class="article">
-                <div class="imgDiv">
-                    <img class="title_img"
-                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
-                </div>
-                <div class="introDiv">
-                    ad
-                </div>
-                <div class="classifybox">
-                    <div class="classify">工具</div>
-                </div>
-            </div>
-            <div class="article">
-                <div class="imgDiv">
-                    <img class="title_img"
-                         src="http://static.golang365.com/I6QEdUX4c40bfzyNoST55nBIPNJgFFhOhGAlDmud.png">
-                </div>
-                <div class="introDiv">
-                    <div class="create_time">
-                        发布于 2019-01-21
-                    </div>
-                </div>
-                <div class="classifybox">
-                    <div class="classify">工具</div>
-                </div>
-            </div>
-
         </div>
+
+
     </div>
 </template>
 
 <script>
+    import {getArticle} from "../../../api/home/article";
+    import page from "@/components/Pagination"
     export default {
         name: 'home',
+        components:{
+            page
+        },
+        data() {
+            return {
+                artList: [],
+                total:0,
+                query: { // 查询条件
+                    page_num: 1, // 当前页
+                    page_size: 2, // 每页条数
+                }
+            }
+        },
+        created() {
+
+           this.getList()
+        },
+        mounted(){
+        },
+        methods: {
+            getList(){
+                getArticle(this.query).then((res) => {
+                    this.artList = res.data.Lists
+                    this.query.page_num = res.data.Page
+                    this.query.page_size = res.data.PageSize
+                    this.total = res.data.Total
+                })
+            },
+            handlePage(val){
+                this.query.page_num = val
+                this.getList()
+                this.$scrollTo(document.documentElement, 0, 200);
+            }
+        }
     }
 </script>
 
-<style>
+<style scoped>
     *, :after, :before {
         box-sizing: border-box;
     }
 
     /****************************容器部分************************/
     .content {
-        max-width: 1080px;
-        margin: 60px auto;
+        width: 70%;
+        margin: 60px 5%;
         -webkit-box-flex: 1;
         -ms-flex: 1;
         flex: 1;
@@ -99,6 +100,7 @@
     }
 
     .article {
+        width: 100%;
         position: relative;
         display: flex;
         height: 280px;
@@ -115,34 +117,38 @@
         transform: scale(1.02);
     }
 
+    .paginate{
+        width: 100%;
+        text-align: center;
+        margin-top: 60px;
+        margin-bottom: 100px;
+    }
+
     /***********************这是每个article的选择器，单双切换***************************/
-    .article:nth-child(3n), .article:nth-child(3n-1) {
-        width: 47.5%;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        height: auto;
-    }
+    /*.article:nth-child(3n), .article:nth-child(3n-1) {*/
+    /*    width: 47.5%;*/
+    /*    -webkit-box-orient: vertical;*/
+    /*    -webkit-box-direction: normal;*/
+    /*    -ms-flex-direction: column;*/
+    /*    flex-direction: column;*/
+    /*    height: auto;*/
+    /*}*/
 
-    .article:nth-child(3n) .title_img, .article:nth-child(3n-1) .title_img {
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        border-bottom-left-radius: 0;
-    }
+    /*.article:nth-child(3n) .title_img, .article:nth-child(3n-1) .title_img {*/
+    /*    border-top-left-radius: 10px;*/
+    /*    border-top-right-radius: 10px;*/
+    /*    border-bottom-left-radius: 0;*/
+    /*}*/
 
-    .article:nth-child(3n) .introDiv, .article:nth-child(3n-1) .introDiv {
-        -webkit-box-flex: 0;
-        -ms-flex: 0 0 220px;
-        flex: 0 0 220px;
-    }
+    /*.article:nth-child(3n) .introDiv, .article:nth-child(3n-1) .introDiv {*/
+    /*    -webkit-box-flex: 0;*/
+    /*    -ms-flex: 0 0 220px;*/
+    /*    flex: 0 0 220px;*/
+    /*}*/
 
     /************************头图部分*************************************/
-    .article:nth-child(3n) .imgDiv, .article:nth-child(3n-1) .imgDiv {
-        -webkit-box-flex: 1;
-        -ms-flex: 1 0 220px;
-        flex: 1 0 220px;
-        height: 220px;
+    .imgDiv {
+        width: 60%;
     }
 
     .title_img {
@@ -218,7 +224,7 @@
 
     /********************以下为introDiv部分***************/
     .introDiv {
-        flex: 0 0 400px;
+       width: 40%;
         padding: 25px 40px;
         color: #34495e;
     }

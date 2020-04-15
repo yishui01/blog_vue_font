@@ -95,8 +95,10 @@
     }
 
     .content {
-        max-width: 100%;
+        width: 76%;
+        margin-left: 4%;
         margin-top: 20px;
+        margin-bottom: 100px;
     }
 
     .main {
@@ -122,6 +124,7 @@
     }
 
     .linkContainer {
+        width: 100%;
         background: white;
         border-radius: 10px;
         overflow: hidden;

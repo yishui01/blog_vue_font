@@ -1,14 +1,16 @@
 <template>
-    <div class="contianer allDiv" style="overflow: auto">
+    <div class="contianer allDiv" style="overflow: hidden">
         <myhead></myhead>
-        <el-row style="margin-top: 80px;">
-            <div class="hQSjWe">
-                <div class="sc-jzJRlG byuKKj ">
-                    <span class="line sct">秋瑾 ·《菩萨蛮·寄女伴》</span>
-                    <span class="line">「无边家国事 并入双蛾翠」</span>
-                </div>
+        <el-row style="margin-top: 80px;min-height: 1000px;">
+            <div class="hQSjWe" @click="changePoems">
+                <transition name="fade">
+                <div class="sc-jzJRlG byuKKj"  v-show="showPoems" >
+                        <span class="line sct"> {{author}}·《{{title}}》</span>
+                        <span class="line">「{{pharagraphs}}」</span>
+                    </div>
+                </transition>
             </div>
-            <el-col :span="16" :offset="4">
+            <el-col :span="20" :offset="4">
                 <div>
                     <keep-alive>
                         <router-view v-if="$route.meta.keepAlive" class="slide"/>
@@ -24,19 +26,61 @@
 <script>
     import myhead from '@/components/myhead'
     import myfoot from '@/components/myfoot'
+    import {getPoems} from "../../../api/home/poems";
 
     export default {
         name: "Layout",
         components: {
             myhead,
             myfoot
+        },
+        created(){
+            this.changePoems()
+        },
+        data() {
+            return {
+                showPoems:false,
+                pharagraphs: "无边家国事 并入双蛾翠",
+                author: "秋瑾",
+                title: "菩萨蛮·寄女伴"
+            }
+        },
+        methods: {
+            changePoems() {
+                getPoems().then((res) => {
+                    var poems = res.data
+                    if (poems.Paragraphs[0].length > 30) {
+                        this.changePoems()
+                        return
+                    }
+                    this.showPoems = false
+                    setTimeout(()=>{
+                        this.author = poems.Author
+                        this.title = poems.Title
+                        this.pharagraphs = poems.Paragraphs[0]
+                    },200)
+
+                    setTimeout(()=>{
+                        this.showPoems = true
+                    },200)
+
+                })
+            }
         }
     }
 </script>
 <style scoped>
-    *{
-        //text-shadow: 0 1px #eee, 0 0 1px rgba(0,0,0,.2);
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity .5s;
     }
+    .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+    {
+        opacity: 0;
+    }
+    /** {*/
+    /* text-shadow: 0 1 px #eee, 0 0 1 px rgba(0, 0, 0, .2);*/
+    /*}*/
+
     .allDiv {
         min-height: 1000px;
     }
@@ -48,6 +92,7 @@
 
     /**********左边栏***********/
     .hQSjWe {
+        background: rgba(255, 255, 255, 0.1);
         position: absolute;
         left: 6%;
         -webkit-box-align: center;
@@ -55,14 +100,14 @@
         box-shadow: rgba(0, 0, 0, 0.5) 0 0 8px;
         box-sizing: border-box;
         width: 7rem;
-        margin-top: 3.8rem;
+        margin-top: 1.8rem;
         margin-right: 0.5rem;
-        min-height: 18rem;
+        min-height: 200px;
         border-radius: 6px;
-        padding: 2rem 1rem 8rem;
+        padding: 1.5rem .5rem 6rem;
         cursor: pointer;
+        transition: 1s;
     }
-
     .hQSjWe > h2 {
         text-transform: capitalize;
         font-size: 0.6rem;
@@ -79,6 +124,7 @@
         line-height: 1.4rem;
         margin-top: 1rem;
         text-shadow: rgba(33, 33, 33, 0.6) 0 0 4px;
+        font-weight: bold;
         padding: 0.4rem;
         animation: 1s ease 0s 1 normal forwards running hbOYnO;
     }
@@ -88,9 +134,10 @@
         -webkit-writing-mode: vertical-lr;
         writing-mode: vertical-lr;
         letter-spacing: 0.4rem;
-        font-size: 1.4rem;
+        font-size: 1.6rem;
         position: relative;
         top: 5px;
+        margin-left: 5px;
     }
 
     .byuKKj .sct {
@@ -130,7 +177,6 @@
         cursor: pointer;
         box-shadow: black 0px 0px 0.8rem;
         width: 3.6rem;
-        height: 3.6rem;
         display: flex;
         -webkit-box-pack: center;
         justify-content: center;

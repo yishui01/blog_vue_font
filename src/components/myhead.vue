@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div  class="fslide">
         <el-row class="header fixed-top" :class="{topC:topC == 1}">
             <el-col :offset="5" :span="15">
                 <div class="navDiv">
@@ -13,7 +13,7 @@
                               :class="{active:$route.path==item.url}">
                         {{item.name}}
                         </span>
-                    <span class="loginSpan navItem" @click="showLogin">登录</span>
+<!--                    <span class="loginSpan navItem" @click="showLogin">登录</span>-->
                      </span>
                 </div>
             </el-col>
@@ -103,7 +103,7 @@
                     {name: '文章', url: '/'},
                     {name: '视频', url: '/video'},
                     {name: '友链', url: '/link'},
-                    {name: '关于', url: '/about'},
+                    //{name: '关于', url: '/about'},
                     {name: '留言', url: '/message'},
                 ]
             }
@@ -224,7 +224,7 @@
 
 <style scoped>
     .topC {
-        background: rgba(105, 142, 206, 1) !important;
+        /*background: rgba(105, 142, 206, 1) !important;*/
         height: 52px !important;
     }
 
@@ -249,7 +249,7 @@
     }
 
     .fixed-top {
-        position: fixed;
+        position: absolute;
         top: 0;
         right: 0;
         left: 0;

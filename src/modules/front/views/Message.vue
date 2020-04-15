@@ -165,8 +165,10 @@
     }
 
     .messageContent {
-        max-width: 100%;
+        width: 75%;
+        margin-left: 5%;
         margin-top: 20px;
+        margin-bottom: 100px;
     }
 
     .commentMain {

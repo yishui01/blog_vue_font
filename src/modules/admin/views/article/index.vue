@@ -428,7 +428,7 @@
                     tags: '',
                     ord: 0, // 排序
                     content: '', // 标签百科
-                    status: 0 //
+                    status: '' //
                     // create_user: '', // 创建人
                     // create_time: '', // 创建时间
                     // update_user: '', // 修改人
