@@ -191,6 +191,11 @@
         border: 1px solid #efefef;
     }
 
+    iframe{
+        width: 100%;
+        height: 600px;
+    }
+
 </style>
 
 <style lang="stylus">

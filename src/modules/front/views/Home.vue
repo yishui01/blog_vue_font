@@ -54,7 +54,6 @@
             }
         },
         created() {
-
            this.getList()
         },
         mounted(){

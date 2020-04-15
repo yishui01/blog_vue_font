@@ -21,7 +21,7 @@
                             <span><i class="el-icon-star-off"></i> {{art.view_count}} 热度</span>
                         </div>
                     </div>
-                    <div class="articleContent " id="articleContent" v-html="marked(art.content)">
+                    <div class="articleContent" id="articleContent" v-html="marked(art.content)">
                         <!--                    <div class="giveLike">-->
                         <!--                        <i class="iconfont lv-icon-yijin13-zan"></i>-->
                         <!--                        <span>2</span>-->
@@ -179,6 +179,7 @@
         },
         mounted() {
             window.addEventListener('scroll', this.appScroll)
+
         },
         methods: {
             //导航栏背景变色
@@ -190,6 +191,7 @@
                     this.catFixed = 0
                 }
             },
+            //回到顶部
             goTop(num = 0) {
                 this.$scrollTo(document.documentElement, 0, num);
             }
@@ -198,6 +200,13 @@
 </script>
 
 <style>
+    .dplayer {
+        display: block;
+        border-radius: 5px;
+        width: 100%;
+        max-height: 800px;
+    }
+
     .catFixed {
         position: fixed !important;
     }
@@ -282,11 +291,13 @@
         margin: 0;
         padding: 0.5em;
         border-radius: 5px;
-        display: block;
         overflow: auto;
-        white-space: pre;
-        font-family: mononoki, Consolas, "Liberation Mono", Menlo, Courier, monospace, "Apple Color Emoji", "Segoe UI Emoji", "Noto Color Emoji", "Segoe UI Symbol", "Android Emoji", "EmojiSymbols";
-        word-break: initial;
+        color: #666;
+        font-weight: 500;
+        font-size: 16px;
+        font-variant-ligatures: no-common-ligatures;
+        font-family: "Helvetica Neue","Luxi Sans","DejaVu Sans",Tahoma,"Hiragino Sans GB","Microsoft Yahei",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+        word-break: normal;
         word-wrap: normal;
     }
 

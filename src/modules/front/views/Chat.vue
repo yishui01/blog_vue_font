@@ -41,7 +41,7 @@
 
                 <p>第二次拍 vlog，然后拍完懒得剪，还是 Freddy 帮我剪的，我在视频里真可爱</p>
             </div>
-            <div class="dplayer"></div>
+            <div class="dplayer" style="width: 200px;height: 200px;"></div>
             <div class="btnDiv">
                 <btn1 />
             </div>
@@ -50,41 +50,16 @@
 </template>
 
 <script>
-    import 'dplayer/dist/DPlayer.min.css';
-    import flv from 'flv.js'
-    import DPlayer from 'dplayer'
     import btn1 from '@/components/Btn1'
 
     export default {
-        name: "Video",
+        name: "Chat",
         components:{
             btn1
         },
-        mounted() {
-            var elements = document.getElementsByClassName('dplayer')
-            for (let i = 0; i < elements.length; i++) {
-                new DPlayer({
-                    container: elements[i],
-                    video: {
-                        //url: 'http://lst.allove.com/uploads/uploads/video/2019/08/06/64a15b0aeb28d156bcfeaff6d799f962.mp4'
-                        url: 'https://img.smartnail.cn/video/flv/pdd.flv',
-                        type: 'customFlv',
-                        customType: {
-                            customFlv: function (video, player) {
-                                const flvPlayer = flv.createPlayer({
-                                    type: 'flv',
-                                    url: video.src,
-                                });
-                                flvPlayer.attachMediaElement(video);
-                                flvPlayer.load();
-                            },
-                        },
-                    },
-                });
+        getList(){
 
-            }
-
-        }
+        },
     }
 </script>
 
@@ -134,8 +109,8 @@
 
     .dplayer {
         border-radius: 5px;
-        max-width: 100%;
-        max-height: 800px;
+        width: 200px;
+        height: 200px;
     }
 
 

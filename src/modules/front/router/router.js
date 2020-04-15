@@ -24,9 +24,9 @@ export default new Router({
                     component: () => import('../views/Article')
                 },
                 {
-                    path: '/video',
-                    name: 'video',
-                    component: () => import('../views/Video')
+                    path: '/chat',
+                    name: 'chat',
+                    component: () => import('../views/Chat')
                 },
                 {
                     path: '/link',

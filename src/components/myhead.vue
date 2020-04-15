@@ -101,7 +101,7 @@
                 ],
                 nav: [
                     {name: '文章', url: '/'},
-                    {name: '视频', url: '/video'},
+                    {name: '闲聊', url: '/chat'},
                     {name: '友链', url: '/link'},
                     //{name: '关于', url: '/about'},
                     {name: '留言', url: '/message'},
