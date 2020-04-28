@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div v-show="isLoad" style="text-align: center;padding-left: 45%;padding-top: 100px;height: 1000px;">
+        <div v-show="isLoad" style="text-align: center;padding-left: 40%;padding-top: 100px;height: 1000px;">
             <load></load>
         </div>
 

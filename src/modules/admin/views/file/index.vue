@@ -44,7 +44,6 @@
     import {mapGetters} from 'vuex'
     import {
         getListApi,
-        createApi,
         deleteApi
     } from '@/api/admin/file'
     import PageFilter from '@/components/PageFilter'
@@ -63,7 +62,6 @@
         data() {
             return {
                 getListApi,
-                createApi,
                 deleteApi,
                 dialogInfo: {
                     title: {

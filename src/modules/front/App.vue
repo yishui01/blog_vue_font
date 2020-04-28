@@ -16,7 +16,7 @@
         name: "app",
         created(){
             getWebInfo("music").then((res)=>{
-                console.log(res)
+
             })
         },
         mounted() {
@@ -105,7 +105,7 @@
         overflow-x: hidden;
         margin: 0;
         cursor: url(https://cdn.jsdelivr.net/gh/xb2016/kratos-pjax@0.4.1/static/images/pointer.cur), auto;
-        background-image: url('../../assets/b.jpg');
+        background-image: url('https://file.wuxxin.com/testupload/75863f525c317279b7ee039bbd16744d.jpg');
         /*background-image: url(https://ae01.alicdn.com/kf/U8720aea1269b407990ade7c258ae0d8b8.jpg);*/
         background-position: center;
         background-size: cover;
