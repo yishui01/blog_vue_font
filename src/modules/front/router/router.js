@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-
+import Article from '../views/Article'
 Vue.use(Router)
 
 export default new Router({
@@ -21,7 +21,7 @@ export default new Router({
                 {
                     path: '/art',
                     name: 'art',
-                    component: () => import('../views/Article')
+                    component: Article
                 },
                 {
                     path: '/chat',
