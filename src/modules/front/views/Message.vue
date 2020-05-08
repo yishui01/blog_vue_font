@@ -224,6 +224,13 @@
         border-bottom: 2px solid #e7e9ee;
         text-align: left;
     }
+    @media screen and (max-width: 768px){
+        .messageContent{
+            width: 95%;
+            margin: 10px;
+            box-sizing: border-box;
+        }
+    }
 
 
 </style>

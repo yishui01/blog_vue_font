@@ -56,8 +56,9 @@
 <style scoped lang="stylus">
 footer
     position relative
-    background: rgba(119,172,238,.8);
-.link
+    background: rgba(62,52,38,1);
+    background: rgba(61,72,82,.5);
+link
     color #fff
     i
         margin-bottom 15px
@@ -67,7 +68,6 @@ footer
 
 .foot-text
     line-height 30px
-    z-index 20
     position relative
     font-size 14px
     text-align: center;

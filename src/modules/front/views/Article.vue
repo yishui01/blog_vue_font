@@ -1,5 +1,7 @@
 <template>
     <div>
+        <el-backtop :bottom="60"></el-backtop>
+
         <div v-show="isLoad" style="text-align: center;padding-left: 40%;padding-top: 100px;height: 1000px;">
             <load></load>
         </div>
@@ -11,7 +13,7 @@
                         <h2>{{art.title}}</h2>
                         <div class="post-box">
                             <span><i class="el-icon-date"></i>
-                                {{art.created_at}}
+                                {{changeDate(art.created_at)}}
                             </span>
                             <span class="tag-box">
                                 <i v-if="art.tags && art.tags.length > 0" class="el-icon-price-tag tagIcon"
@@ -125,17 +127,15 @@
 </template>
 
 <script>
-    import load from '@/components/RotateLoading'
+
     import {getDetail} from "../../../api/home/article";
+    import {dateTimeToDate} from "../../../utils/util";
     import marked from '@/common/js/marked'
     import Catalog from 'progress-catalog'
     import 'progress-catalog/src/progress-catalog.css'
 
     export default {
         name: "Article",
-        components: {
-            load
-        },
         data() {
             return {
                 marked,
@@ -152,49 +152,35 @@
                 this.$router.push("/")
                 return
             }
-            this.goTop()
             getDetail(this.sn).then((res) => {
                 this.art = res.data
-                setTimeout(() => {
-                    this.goTop()
-                }, 20)
+                document.title = this.art.title
                 this.isLoad = 0
                 setTimeout(() => {
                     new Catalog({
                         contentEl: 'articleContent',
+                        linkActiveClass: 'cl-link-active', // active的目录项
                         catalogEl: `wrapper`,
-                        cool: false,
-                        topMargin: 100,
-                        bottomMargin: 100,
+                        topMargin: 0,
+                        bottomMargin: 0,
                         linkClass: "cataItem",
                         activeHook: () => {
-                        }
+                        },
+                        cool: false // 炫酷模式开关
                     })
                     //有字就
                     if (document.getElementsByClassName("cataItem").length > 1) { //文章目录div也是这个，所以是 > 1
                         this.cataLoad = 1
                     }
-                }, 100)
+                }, 1000)
             })
         },
         mounted() {
-            window.addEventListener('scroll', this.appScroll)
-
         },
         methods: {
-            //导航栏背景变色
-            appScroll() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-                if (scrollTop > 80) {
-                    this.catFixed = 1
-                } else {
-                    this.catFixed = 0
-                }
+            changeDate(date){
+                return dateTimeToDate(date)
             },
-            //回到顶部
-            goTop(num = 0) {
-                this.$scrollTo(document.documentElement, 0, num);
-            }
         }
     }
 </script>
@@ -212,10 +198,10 @@
     }
 
     .cataDiv {
-        padding: 10px;
-        position: relative;
+        padding: 10px 40px 10px 10px;
+        position: fixed;
         border-radius: 5px;
-        top: 40px;
+        top: 109px;
         transition: 1s;
         margin-left: 20px;
         background: white;
@@ -251,7 +237,7 @@
         float: left;
         box-sizing: border-box;
         margin: 30px 0 50px 5%;
-        padding: 50px 50px 20px;
+        padding: 50px 35px 20px;
         font-size: 16px;
         color: #444;
         background: rgba(255, 255, 255, 1);
@@ -289,7 +275,7 @@
 
     .articleContent {
         margin: 0;
-        padding: 0.5em;
+        width: 100%;
         border-radius: 5px;
         overflow: auto;
         color: #666;
@@ -613,4 +599,93 @@
         cursor: pointer;
     }
 
+    @media screen and (max-width: 768px){
+        .detail{
+            width: 100%;
+            margin: 0;
+            padding: 20px 15px;
+        }
+    }
+</style>
+
+<style>
+    .articleContent img{
+        max-width: 100%;
+    }
+    .articleContent p {
+        line-height: 30px !important;
+    }
+    .articleContent h2 {
+        font-size: 1.5em;
+        position: relative;
+        padding-bottom: 10px;
+        color: #111;
+        margin: 20px 0;
+    }
+    .articleContent h2:before {
+        content: "";
+        width: 100%;
+        border-bottom: 1px solid #eee;
+        position: absolute;
+        bottom: -1px;
+        left: -20px;
+    }
+    .articleContent h2:after{
+        -webkit-transition: all .35s;
+        transition: all .35s;
+        content: "";
+        position: absolute;
+        background: rgba(242,190,69,0.85);
+        width: 1em;
+        height: 5px;
+        bottom: -3px;
+        left: 0;
+        border-radius: 6px;
+        box-shadow: 0 2px 12px rgba(242,190,69,0.85);
+    }
+    .articleContent h2:hover:after {
+        width: 2em;
+    }
+    .articleContent h1, .articleContent h2, .articleContent h3, .articleContent h4, .articleContent h5, .articleContent h6 {
+        color: #111;
+        margin: 20px 0;
+    }
+    .articleContent a {
+        -webkit-transition: all .35s;
+        transition: all .35s;
+        color: #44cef6;
+        text-decoration: none;
+        position: relative;
+        word-wrap: break-word;
+    }
+    .articleContent a:hover::after {
+        left: 0;
+        width: 100%;
+    }
+    .articleContent a::after {
+        -webkit-transition: width .35s;
+        transition: width .35s;
+        content: "";
+        right: 0;
+        width: 0;
+        bottom: -2px;
+        position: absolute;
+        border-bottom: 1px solid;
+    }
+
+    .articleContent code:not(.hljs):not(.highlight-chroma) {
+        padding: 0.2em 0.4em;
+        margin: 0;
+        font-size: 85%;
+        border-radius: 3px;
+        font-family: mononoki,Consolas,"Liberation Mono",Menlo,Courier,monospace,"Apple Color Emoji","Segoe UI Emoji","Noto Color Emoji","Segoe UI Symbol","Android Emoji","EmojiSymbols";
+        word-break: break-word;
+        background-size: 20px 20px;
+        white-space: pre-wrap;
+        background-color: rgba(27,31,35,0.05);
+        border: 1px solid #d7dae2;
+    }
+    .articleContent li {
+        line-height: 24px;
+    }
 </style>

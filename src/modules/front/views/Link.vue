@@ -226,4 +226,13 @@
         background: #ecf0f1;
     }
 
+    @media screen and (max-width: 768px){
+        .content{
+            width: 95%;
+            margin: 10px;
+            box-sizing: border-box;
+            margin-top: 15px;
+        }
+    }
+
 </style>

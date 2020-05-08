@@ -561,7 +561,6 @@
 
     .comments-area ol {
         margin-top: 15px;
-        list-style: none;
         margin-left: -40px
     }
 

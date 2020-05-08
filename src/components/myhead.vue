@@ -1,10 +1,10 @@
 <template>
-    <div  class="fslide">
+    <div class="fslide">
         <el-row class="header fixed-top" :class="{topC:topC == 1}">
-            <el-col :offset="5" :span="15">
-                <div class="navDiv">
+            <el-col :xs="{span:24}" :sm="{offset:5,span:15}">
+                <div class="navDiv pcDiv">
                     <span class="title" @click="$to('/')">
-                        不要怂博客
+                        我看看不到
                     </span>
                     <span style="float: right;">
                         <span @click="$to(item.url)"
@@ -13,33 +13,55 @@
                               :class="{active:$route.path==item.url}">
                         {{item.name}}
                         </span>
-<!--                    <span class="loginSpan navItem" @click="showLogin">登录</span>-->
+                        <!-- <span class="loginSpan navItem" @click="showLogin">登录</span>-->
                      </span>
                 </div>
+
+                <!--手机菜单-->
+                <el-collapse accordion class="phoneDiv" v-model="activeNames">
+                    <div class="mTitle" @click="$to('/')">我看看不到
+                    </div>
+                    <el-collapse-item name="1">
+                        <template slot="title">
+                            <div class="navBtn">
+                                <span></span>
+                                <span></span>
+                                <span></span>
+                            </div>
+                        </template>
+                        <div class="mPanel">
+                            <div @click="goUrl(item.url)" class="panelItem" v-for="(item, index) in nav" :key="index"
+                                 :class="{active:$route.path==item.url}">
+                                {{item.name}}
+                            </div>
+                        </div>
+                    </el-collapse-item>
+                </el-collapse>
             </el-col>
         </el-row>
 
-<!-----------------------------------------遮罩、弹框---------------------------------------------------->
+
+        <!-----------------------------------------遮罩、弹框---------------------------------------------------->
         <div v-if="divVis" @click="hideLogin" class="mask"></div>
 
         <div v-show="divVis" class="loginDiv" :class="{showDia:winVis}">
             <div class="card" id="loginDiv" @mousedown="down" @mouseup="up">
                 <div class="front">
                     <div style="width: 100%;text-align: center;">
-                        <img  src="../assets/login.png" draggable="false">
+                        <img src="../assets/login.png" draggable="false">
                     </div>
                     <div @click="loginClick" class="descText">
                         {{loginText}}
                     </div>
-                 </div>
-                 <div class="back">
-                     <img src="../assets/hello.jpg" draggable="false" class="helloImg">
-                     <div class="barP">
+                </div>
+                <div class="back">
+                    <img src="../assets/hello.jpg" draggable="false" class="helloImg">
+                    <div class="barP">
                         <div class="bar"></div>
                         <div class="barText">请选择快捷登录方式</div>
                         <div class="bar"></div>
-                     </div>
-                     <div>
+                    </div>
+                    <div>
                           <span class="iconSpan">
                               <div>
                                   <svg class="icon svg-icon" aria-hidden="true">
@@ -48,7 +70,7 @@
                               </div>
                               <span class="ltxt">Github</span>
                           </span>
-                          <span class="iconSpan">
+                        <span class="iconSpan">
                               <div>
                                <svg class="icon svg-icon" aria-hidden="true">
                                       <use xlink:href="#icon-QQ"></use>
@@ -56,7 +78,7 @@
                                </div>
                               <span class="ltxt">QQ登录</span>
                           </span>
-                          <span class="iconSpan">
+                        <span class="iconSpan">
                               <div>
                                <svg class="icon svg-icon" aria-hidden="true">
                                       <use xlink:href="#icon-weibo"></use>
@@ -64,8 +86,8 @@
                                </div>
                               <span class="ltxt">微博登录</span>
                           </span>
-                     </div>
-                  </div>
+                    </div>
+                </div>
             </div>
         </div>
 
@@ -82,16 +104,18 @@
         name: "myhead",
         data() {
             return {
+                activeNames: '0',
+                activeName: '1',
                 topC: 0,
                 divVis: false,
                 winVis: false,
                 lockScroll: false,
-                loginText:'不信你翻转试试',
-                step:0,
-                switch:false,
-                startDeg:0,
-                startX:0,
-                textMap:[
+                loginText: '不信你翻转试试',
+                step: 0,
+                switch: false,
+                startDeg: 0,
+                startX: 0,
+                textMap: [
                     '你以为这样就能翻转了吗？',
                     '别点了，我是不会翻的',
                     '大哥，谁告诉你翻转是靠点的',
@@ -113,30 +137,33 @@
         },
         methods: {
             //导航栏背景变色
-            appScroll() {
-                let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
-                if (scrollTop > 100) {
-                    this.topC = 1
-                } else {
-                    this.topC = 0
-                }
+            // appScroll() {
+            //     let scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+            //     if (scrollTop > 100) {
+            //         this.topC = 1
+            //     } else {
+            //         this.topC = 0
+            //     }
+            // },
+            goUrl(url) {
+                this.activeNames = 0
+                this.$to(url)
             },
-
             //登录弹出框时，禁止滚动
             showLogin() {
                 this.divVis = true
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.winVis = true  //这里要等divVis把元素显示出来后，再挂另一个class，trasition才会触发，一次性挂上去直接秒出不会动画
-                },50)
+                }, 50)
                 //阻止浏览器事件
                 document.addEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
                 document.addEventListener('mousewheel', this.fixScroll, {passive: false});
             },
             hideLogin() {
                 this.winVis = false
-                setTimeout(()=>{
+                setTimeout(() => {
                     this.divVis = false
-                },120)
+                }, 120)
                 document.removeEventListener('DOMMouseScroll', this.fixScroll, {passive: false});
                 document.removeEventListener('mousewheel', this.fixScroll, {passive: false});
 
@@ -156,12 +183,12 @@
             },
 
             //点击文字变化
-            loginClick(){
+            loginClick() {
                 this.loginText = this.textMap[this.step]
                 this.step++
             },
             //down、move、up为翻转逻辑
-            down(event){
+            down(event) {
                 this.switch = true
                 this.startX = event.clientX
                 var element = event.currentTarget;
@@ -169,7 +196,7 @@
 
                 var text = element.style.transform
                 var deg = text.match(/\d+/g)
-                if (!deg){
+                if (!deg) {
                     deg = 0
                 } else {
                     deg = deg[0]
@@ -180,14 +207,14 @@
                 document.addEventListener('mouseup', this.up, {passive: false});
 
             },
-            move(event){
-                if (this.switch){
+            move(event) {
+                if (this.switch) {
                     var element = document.getElementById('loginDiv')
                     var deg = event.clientX - this.startX
-                    element.style.transform = "rotateY("+(Number(this.startDeg)+deg)+"deg)";
+                    element.style.transform = "rotateY(" + (Number(this.startDeg) + deg) + "deg)";
                 }
             },
-            up(){
+            up() {
                 this.switch = false
                 document.removeEventListener('mousemove', this.move, {passive: false});
                 document.removeEventListener('mouseup', this.up, {passive: false});
@@ -196,7 +223,7 @@
 
                 var text = element.style.transform
                 var deg = text.match(/[-]?\d+/g)
-                if (!deg){
+                if (!deg) {
                     deg = 0
                 } else {
                     deg = deg[0]
@@ -205,15 +232,15 @@
                 var diff = deg % 180
                 if (diff < 0) {
                     if (diff <= -90) {
-                        element.style.transform = "rotateY("+(deg-180-diff)+"deg)";
+                        element.style.transform = "rotateY(" + (deg - 180 - diff) + "deg)";
                     } else {
-                        element.style.transform = "rotateY("+(deg-diff)+"deg)";
+                        element.style.transform = "rotateY(" + (deg - diff) + "deg)";
                     }
                 } else {
                     if (diff >= 90) {
-                        element.style.transform = "rotateY("+(deg+180-diff)+"deg)";
+                        element.style.transform = "rotateY(" + (deg + 180 - diff) + "deg)";
                     } else {
-                        element.style.transform = "rotateY("+(deg-diff)+"deg)";
+                        element.style.transform = "rotateY(" + (deg - diff) + "deg)";
                     }
                 }
 
@@ -275,7 +302,6 @@
     }
 
 
-
     .title:hover, .navItem:hover {
         background-color: rgba(0, 0, 0, .1);
     }
@@ -285,7 +311,7 @@
     }
 
     /******以下为遮罩弹框*********/
-    .mask{
+    .mask {
         width: 100%;
         height: 100%;
         position: fixed;
@@ -295,49 +321,55 @@
         left: 0;
         top: 0;
     }
-    .descText{
-        cursor:pointer;
-        text-align:center;
+
+    .descText {
+        cursor: pointer;
+        text-align: center;
         font-size: 30px;
         font-weight: 900;
     }
 
-    .helloImg{
+    .helloImg {
         box-shadow: 0 6px 6px -6px #828282;
         width: 100%;
-        border-top-left-radius:5px;
-        border-top-right-radius:5px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
     }
 
-    .barP{
+    .barP {
         padding: 10px;
         margin-bottom: 20px;
     }
-    .bar{
+
+    .bar {
         display: inline-block;
         height: 1px;
         width: 90px;
         background: #f5f5f5;
     }
-    .barText{
+
+    .barText {
         display: inline-block;
         vertical-align: middle;
         margin: 5px 10px 0;
     }
 
-    .ltxt{
-        font-size: 12px;color: #666;
+    .ltxt {
+        font-size: 12px;
+        color: #666;
     }
 
-    .iconSpan{
-        display:inline-block;
+    .iconSpan {
+        display: inline-block;
         padding: 0 30px;
         opacity: .6;
         cursor: pointer;
     }
-    .iconSpan:hover{
+
+    .iconSpan:hover {
         opacity: 1;
     }
+
     .icon {
         width: 1em;
         height: 1em;
@@ -345,6 +377,7 @@
         fill: currentColor;
         overflow: hidden;
     }
+
     .svg-icon {
         /* 通过设置 font-size 来改变图标大小 */
         font-size: 55px;
@@ -381,16 +414,16 @@
         transform: scale(.7);
         visibility: hidden;
         opacity: 0;
-        -webkit-transition: transform .3s,opacity .3s;
-        -moz-transition: transform .3s,opacity .3s;
-        transition: transform .3s,opacity .3s;
+        -webkit-transition: transform .3s, opacity .3s;
+        -moz-transition: transform .3s, opacity .3s;
+        transition: transform .3s, opacity .3s;
         -moz-user-select: none;
         -khtml-user-select: none;
         -webkit-user-select: none;
         user-select: none;
     }
 
-    .showDia{
+    .showDia {
         visibility: visible;
         opacity: 1;
         -webkit-transform: scale(1);
@@ -399,11 +432,11 @@
         transform: scale(1);
     }
 
-    .card{
+    .card {
         width: 100%;
         height: 100%;
         background-color: #fff;
-        transition:  2s;
+        transition: 2s;
         transform-style: preserve-3d;
         border-radius: 5px;
     }
@@ -418,8 +451,93 @@
         backface-visibility: hidden;
         border-radius: 5px;
     }
+
     .back {
         transform: rotateY(180deg);
     }
 
+    .phoneDiv {
+        display: none;
+    }
+
+    .phoneDiv span {
+        background: #fff;
+        margin: 4px 2.5px;
+        display: table;
+        width: 25px;
+        height: 3px;
+        border-radius: 18%;
+    }
+
+    .mPanel {
+        z-index: 2000;
+        background-image: url('https://file.wuxxin.com/testupload/3cfaa1b49f760f4dfc548ad683407335.jpg');
+        background-size: cover;
+        color: white;
+        text-align: center;
+    }
+
+    .panelItem {
+        padding: 10px;
+        background: rgba(101, 157, 241, 0.8);
+        font-size: 16px;
+        font-weight: 800
+    }
+
+    .navBtn {
+        background: #5587d2;
+        position: absolute;
+        right: 10px;
+        top: 15px;
+        border-radius: 5px;
+        z-index: 999;
+        padding: 6px 6px;
+    }
+
+    .mTitle {
+        width: 100px;
+        position: absolute;
+        font-size: 18px;
+        font-weight: 700;
+        padding-left: 10px;
+        padding-top: 10px;
+        height: 50px;
+    }
+
+    @media screen and (max-width: 768px) {
+        .pcDiv {
+            display: none
+        }
+
+        .phoneDiv {
+            display: block;
+            width: 100%;
+
+            top: 9px;
+            z-index: 20;
+            left: 20px
+        }
+
+    }
+
+</style>
+<style>
+    .el-collapse-item {
+        background: transparent !important;
+        border: none;
+    }
+
+    .el-collapse-item__wrap {
+        background: transparent !important;
+        border: none;
+    }
+
+    .el-collapse-item__header {
+        background: transparent !important;
+        border: none;
+    }
+
+    .el-collapse {
+        border: none;
+    }
 </style>

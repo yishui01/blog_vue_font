@@ -1,7 +1,10 @@
 <template>
     <div>
-        <div class="content">
-            <div class="article slide" v-for="(item) in artList" @click="$to('art',{sn:item.sn})">
+        <div v-show="isLoad" style="text-align: center;padding-left: 40%;padding-top: 100px;height: 1000px;">
+            <load></load>
+        </div>
+        <div v-show="!isLoad" class="content">
+            <div class="article slide" v-for="(item) in artList" @click="goArt(item.sn)">
                 <div class="imgDiv forceShow" >
                     <img class="title_img" :src="item.img">
                 </div>
@@ -45,11 +48,12 @@
         },
         data() {
             return {
+                isLoad:1,
                 artList: [],
                 total:0,
                 query: { // 查询条件
                     page_num: 1, // 当前页
-                    page_size: 2, // 每页条数
+                    page_size: 5, // 每页条数
                 }
             }
         },
@@ -65,12 +69,18 @@
                     this.query.page_num = res.data.Page
                     this.query.page_size = res.data.PageSize
                     this.total = res.data.Total
+                    this.isLoad = 0
                 })
             },
             handlePage(val){
+                this.isLoad = 1
                 this.query.page_num = val
                 this.getList()
-                this.$scrollTo(document.documentElement, 0, 200);
+                this.$scrollTo(document.documentElement, 0, 0);
+            },
+            goArt(sn){
+                this.$scrollTo(document.documentElement, 0, 0);
+                this.$to('art',{sn:sn})
             }
         }
     }
@@ -151,13 +161,13 @@
     }
 
     .title_img {
-        width: 100%;
-        height: 100%;
-        border-radius: 10px 0 0 10px;
-        -o-object-fit: cover;
-        object-fit: cover;
-        mix-blend-mode: multiply;
-    }
+         width: 100%;
+         height: 100%;
+         border-radius: 10px 0 0 10px;
+         -o-object-fit: cover;
+         object-fit: cover;
+         mix-blend-mode: multiply;
+     }
 
     /*******************以下为左上角类别套带样式*************/
     .article:nth-child(3n) .classify, .article:nth-child(3n-1) .classify {
@@ -273,4 +283,42 @@
     .clickAndComm span {
         margin-right: 30px;
     }
+
+    @media screen and (max-width: 768px) {
+        .content{
+            width: 100%;
+            margin: 60px 0;
+            padding: 0 10px;
+        }
+    }
+    @media screen and (max-width: 768px){
+        .content{
+            margin-top: 15px;
+        }
+        .article{
+            width: 100%;
+            border-radius: 10px ;
+            overflow: hidden;
+            -webkit-box-orient: vertical;
+            -webkit-box-direction: normal;
+            -ms-flex-direction: column;
+            flex-direction: column;
+            height: auto;
+        }
+        .imgDiv{
+            width: 100%;
+        }
+        .introDiv{
+            width: 100%;
+        }
+        .title_img {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px 10px 0 0;
+            -o-object-fit: cover;
+            object-fit: cover;
+            mix-blend-mode: multiply;
+        }
+    }
+
 </style>

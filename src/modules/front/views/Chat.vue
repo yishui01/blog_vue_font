@@ -1,5 +1,5 @@
 <template>
-    <div style="padding-top: 50px;">
+    <div>
         <div class="articleDiv">
             <div class="titleDiv">
                 <h2>2018 ChinaJoy 参展日记</h2>
@@ -66,6 +66,7 @@
 <style scoped>
     .articleDiv {
         width: 70%;
+        margin-top: 50px;
         margin-left: 5%;
         margin-bottom: 50px;
         padding: 20px 45px 40px;
@@ -117,6 +118,14 @@
     .btnDiv {
         margin-top: 40px;
         text-align: center;
+    }
+
+    @media screen and (max-width: 768px){
+        .articleDiv{
+            width: 95%;
+            margin: 10px;
+            box-sizing: border-box;
+        }
     }
 
 </style>

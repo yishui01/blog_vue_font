@@ -2,15 +2,17 @@
     <div class="contianer allDiv" style="overflow: hidden">
         <myhead></myhead>
         <el-row style="margin-top: 80px;min-height: 1000px;">
-            <div class="hQSjWe" @click="changePoems">
-                <transition name="fade">
-                <div class="sc-jzJRlG byuKKj"  v-show="showPoems" >
-                        <span class="line sct"> {{author}}·《{{title}}》</span>
-                        <span class="line">「{{pharagraphs}}」</span>
-                    </div>
-                </transition>
-            </div>
-            <el-col :span="20" :offset="4">
+            <el-col :sm="{span:2,offset:2}" :xs="0">
+                <div class="hQSjWe" @click="changePoems">
+                    <transition name="fade">
+                        <div class="sc-jzJRlG byuKKj"  v-show="showPoems" >
+                            <span class="line sct"> {{author}}·《{{title}}》</span>
+                            <span class="line">「{{pharagraphs}}」</span>
+                        </div>
+                    </transition>
+                </div>
+            </el-col>
+            <el-col :sm="20" :xs="24">
                 <div>
                     <keep-alive>
                         <router-view v-if="$route.meta.keepAlive" class="slide"/>
@@ -93,7 +95,6 @@
     /**********左边栏***********/
     .hQSjWe {
         background: rgba(255, 255, 255, 0.1);
-        position: absolute;
         left: 6%;
         -webkit-box-align: center;
         align-items: center;
@@ -239,5 +240,6 @@
         background-color: #f7f7f7;
         border: 1px solid #efefef;
     }
+
 
 </style>
