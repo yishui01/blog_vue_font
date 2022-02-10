@@ -27,7 +27,7 @@
     "katelog": "0.0.6",
     "marked": "^0.8.2",
     "mavon-editor": "^2.8.3",
-    "node-sass": "^4.13.1",
+    "node-sass": "^7.0.0",
     "normalize.css": "^8.0.1",
     "nprogress": "^0.2.0",
     "optimize-css-assets-webpack-plugin": "^5.0.3",
